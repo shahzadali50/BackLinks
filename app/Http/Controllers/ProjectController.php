@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Website;
 use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Session;
@@ -113,5 +114,18 @@ class ProjectController extends Controller
             return redirect()->route('advertiser.project.list')->with('error', 'Something went wrong while deleting the website.');
         }
 
+    }
+
+    public function webList(Request $request){
+        $webQuery = Website::query();
+        if ($request->query('audience')) {
+            $webQuery->where('audience', 'like', "%" . $request->query('audience') . "%");
+        }
+        elseif ($request->query('categories')) {
+            $webQuery->where('categories', 'like', "%" . $request->query('categories') . "%");
+        }
+        // $website=Website::all();
+        $website = $webQuery->get();
+        return view('advertiser.website-list',compact('website'));
     }
 }

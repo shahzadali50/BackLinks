@@ -9,12 +9,6 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-// Route::middleware('guest')->group(function () {
-//     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-//     Route::post('/login', [LoginController::class, 'login']);
-//     Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
-//     Route::post('/register', [LoginController::class, 'register']);
-// });
 
 Route::get('/home', [MainController::class, 'checkAccount'])->name('dashboard');
 
