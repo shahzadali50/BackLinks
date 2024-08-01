@@ -181,6 +181,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.webs.list') ? 'active' : '' }}"
+                                href="{{ route('advertiser.webs.list') }}">
+                                <i class="fa fa-list-ul" aria-hidden="true"></i><span>Webs</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('advertiser.ProfileSetting') ? 'active' : '' }}"
                                 href="{{ route('advertiser.ProfileSetting') }}">
                                 <i class="fa fa-cog" aria-hidden="true"></i><span>Profile Setting</span>

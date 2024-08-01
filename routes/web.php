@@ -62,4 +62,6 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/projects/create/step-2', [ProjectController::class, 'storeStep2'])->name('storeStep2');
     Route::post('/projects/create/step-3', [ProjectController::class, 'storeStep3'])->name('storeStep3');
     Route::post('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+    Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
+
 });
