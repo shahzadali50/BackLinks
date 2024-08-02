@@ -41,6 +41,9 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/payments/billing', [MainController::class, 'billing'])->name('billing');
     Route::get('/support-ticket/ticket-list', [MainController::class, 'list'])->name('ticket.list');
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
+    Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
+    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+
 });
 // advertiser Routes
 Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser')->group(function () {
@@ -57,5 +60,7 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/projects/create/step-3', [ProjectController::class, 'storeStep3'])->name('storeStep3');
     Route::post('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
+    Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
+    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
 
 });

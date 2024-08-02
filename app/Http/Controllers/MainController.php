@@ -6,10 +6,13 @@ use App\Models\Website;
 use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class MainController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // $user = Auth::user();
 
         // if ($user) {
@@ -23,7 +26,8 @@ class MainController extends Controller
         return view('index');
     }
 
-    public function checkAccount(){
+    public function checkAccount()
+    {
         $user = Auth::user();
 
         if ($user) {
@@ -40,62 +44,135 @@ class MainController extends Controller
 
 
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('publishers.dashboard');
     }
-    public function ContactSupport(){
+    public function ContactSupport()
+    {
         return view('publishers.contact-support');
     }
-    public function ProfileSetting(){
+    public function ProfileSetting()
+    {
         return view('publishers.profile-setting');
     }
-    public function website(){
+    public function website()
+    {
         $user = auth()->user();
 
-        $website=Website::where('user_id', $user->id)->get();
+        $website = Website::where('user_id', $user->id)->get();
 
-        return view('publishers.website.index',compact('website'));
+        return view('publishers.website.index', compact('website'));
     }
-    public function exploreNow(){
+    public function exploreNow()
+    {
         return view('publishers.nft.explore');
     }
-    public function membership(){
+    public function membership()
+    {
         return view('publishers.membership');
     }
-    public function transactions(){
+    public function transactions()
+    {
         return view('publishers.payments.transactions');
     }
-    public function billing(){
+    public function billing()
+    {
         return view('publishers.payments.billing');
     }
-    public function list(){
+    public function list()
+    {
         return view('publishers.support-tickets.list');
     }
-    public function chat(){
+    public function chat()
+    {
         return view('publishers.chat');
     }
-    public function sponsoredList(){
+    public function sponsoredList()
+    {
         return view('publishers.sponsored.list');
     }
-    public function advertiserDashboard(){
+    public function advertiserDashboard()
+    {
         return view('advertiser.dashboard');
     }
-    public function wallet(){
+    public function wallet()
+    {
         return view('advertiser.wallet');
     }
     // public function list(){
     //     return view('advertiser.project.list');
 
     // }
-    public function projectStep1(){
+    public function projectStep1()
+    {
         return view('advertiser.project.project-step1');
     }
-    public function projectStep2(){
+    public function projectStep2()
+    {
         return view('advertiser.project.project-step2');
     }
-    public function projectStep3(){
+    public function projectStep3()
+    {
         return view('advertiser.project.project-step3');
     }
 
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
 
+        // Check if the old password matches the current user's password
+        if (!Hash::check($request->password, Auth::user()->password)) {
+            Flashy::error(' ❌The provided password does not match your current password.', '#');
+            return back()->withErrors(['password' => 'The provided password does not match your current password.']);        }
+
+        // Update the user's password
+        Auth::user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+        Flashy::mutedDark(' ✅Password updated successfully. ', '#');
+
+
+        return back()->with('success', 'Password updated successfully.');
+    }
+
+    public function updateEmail(Request $request)
+    {
+        // Get the current user
+        $user = Auth::user();
+
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'old_email' => 'required|email',
+            'new_email' => [
+                'required',
+                'email',
+                'different:old_email',
+                'unique:users,email,' . $user->id
+            ],
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // Check if the old email matches the user's current email
+        if ($user->email !== $request->old_email) {
+            Flashy::error(' ❌The provided email does not match your current email address.', '#');
+            return back()->withErrors(['old_email' => 'The provided email does not match your current email address.']);
+        }
+
+        // Update the user's email
+        $user->update([
+            'email' => $request->new_email
+        ]);
+
+        // Optionally, you may want to log out the user or send a confirmation email
+        Flashy::mutedDark(' ✅Email updated successfully.', '#');
+        return back()->with('success', 'Email updated successfully.');
+    }
 }
