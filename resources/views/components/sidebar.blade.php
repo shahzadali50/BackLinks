@@ -16,7 +16,7 @@
             </span>
         </a>
         <!-- Light Logo-->
-        <a href="{{ route('publishers.dashboard') }}" class="logo logo-light">
+        <a href="{{ route('dashboard') }}" class="logo logo-light">
             <span class="logo-sm">
                 <img src="{{ URL::asset('build/images/logo-sm.png') }}" alt="" height="22">
             </span>
@@ -58,20 +58,22 @@
                                 <i class="fa fa-list-alt" aria-hidden="true"></i><span>Website</span>
                             </a>
                         </li>
+                        {{-- Sell --}}
+                        <li class="nav-item">
+                            <a class="nav-link menu-link"
+                                href="">
+                                <i class='bx bxs-analyse'></i><span>Sell</span>
+                            </a>
+                        </li>
+                         {{-- Wallet --}}
+                         <li class="nav-item">
+                            <a class="nav-link menu-link"
+                                href="">
+                                <i class="fa fa-google-wallet" aria-hidden="true"></i><span>Wallet</span>
+                            </a>
+                        </li>
 
-                        <!-- Membership Menu Item -->
-                        <li class="nav-item">
-                            <a class="nav-link menu-link {{ request()->routeIs('publishers.membership') ? 'active' : '' }}"
-                                href="{{ route('publishers.membership') }}">
-                                <i class="ri-honour-line"></i> <span>Membership</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link {{ request()->routeIs('publishers.sponsored') ? 'active' : '' }}"
-                                href="{{ route('publishers.sponsored') }}">
-                                <i class="fa fa-certificate" aria-hidden="true"></i><span>Sponsored</span>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('publishers.ContactSupport') ? 'active' : '' }}"
                                 href="{{ route('publishers.ContactSupport') }}">
@@ -85,6 +87,20 @@
                                 <i class="fa fa-cog" aria-hidden="true"></i> <span>Profile Setting</span>
                             </a>
                         </li>
+
+                          <!-- Membership Menu Item -->
+                        {{-- <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('publishers.membership') ? 'active' : '' }}"
+                                href="{{ route('publishers.membership') }}">
+                                <i class="ri-honour-line"></i> <span>Membership</span>
+                            </a>
+                        </li> --}}
+                        {{-- <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('publishers.sponsored') ? 'active' : '' }}"
+                                href="{{ route('publishers.sponsored') }}">
+                                <i class="fa fa-certificate" aria-hidden="true"></i><span>Sponsored</span>
+                            </a>
+                        </li> --}}
 
                         <!-- Payments Menu Item ✨ -->
                         {{-- <li class="nav-item">
@@ -160,11 +176,33 @@
                                 <i class="fa fa-home" aria-hidden="true"></i> <span>Home</span>
                             </a>
                         </li>
-                        {{-- Contact Support --}}
+                        {{-- My Projects --}}
                         <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.project.list') ? 'active' : '' }}"
+                                href="{{ route('advertiser.project.list') }}">
+                                <i class="fa fa-list-ul" aria-hidden="true"></i><span>My Projects</span>
+                            </a>
+                        </li>
+                        {{-- Websites --}}
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.webs.list') ? 'active' : '' }}"
+                                href="{{ route('advertiser.webs.list') }}">
+                                <i class="fa fa-list-ul" aria-hidden="true"></i><span>Websites</span>
+                            </a>
+                        </li>
+                        {{-- if need then uncomment 👇 --}}
+                        {{-- Contact Support --}}
+                        {{-- <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('advertiser.ContactSupport') ? 'active' : '' }}"
                                 href="{{ route('advertiser.ContactSupport') }}">
                                 <i class="fa fa-life-ring" aria-hidden="true"></i><span>Contact Support</span>
+                            </a>
+                        </li> --}}
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link "
+                                href="">
+                                <i class="fa fa-money" aria-hidden="true"></i><span>Purchase</span>
                             </a>
                         </li>
                         {{-- Wallet --}}
@@ -174,18 +212,8 @@
                                 <i class="fa fa-google-wallet" aria-hidden="true"></i><span>Wallet</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.project.list') ? 'active' : '' }}"
-                                href="{{ route('advertiser.project.list') }}">
-                                <i class="fa fa-list-ul" aria-hidden="true"></i><span>My Projects</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.webs.list') ? 'active' : '' }}"
-                                href="{{ route('advertiser.webs.list') }}">
-                                <i class="fa fa-list-ul" aria-hidden="true"></i><span>Webs</span>
-                            </a>
-                        </li>
+
+
                         <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('advertiser.ProfileSetting') ? 'active' : '' }}"
                                 href="{{ route('advertiser.ProfileSetting') }}">

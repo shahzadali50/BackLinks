@@ -23,8 +23,9 @@ Projects List
 
 <div class="row">
     <div class="col-md-8 py-2">
+        
         @if(session('success'))
-        <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show"
+        <div class="alert alert-success alert-dismissible bg-success text-white alert-label-icon fade show"
             role="alert">
             <i class="ri-check-double-line label-icon"></i>
             <strong>Success</strong> - {{ session('success') }}

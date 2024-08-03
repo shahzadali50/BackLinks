@@ -8,9 +8,11 @@ Project | {{ auth()->user()->role }}
         background: transparent;
         padding: 10px;
         border-radius: 4px;
-        max-width: 400px;
+        height: 39px;
+        /* max-width: 400px; */
         border: 1px solid #ccc
     }
+
 
     .tags-input-wrapper input {
         border: none;
@@ -19,6 +21,7 @@ Project | {{ auth()->user()->role }}
         width: 140px;
         margin-left: 8px;
     }
+
 
     .tags-input-wrapper .tag {
         display: inline-block;
@@ -36,6 +39,9 @@ Project | {{ auth()->user()->role }}
         cursor: pointer;
         color: white;
     }
+    .select2-container .select2-selection--multiple{
+        height: 39px;
+    }
 </style>
 @endsection
 @section('content')
@@ -49,13 +55,13 @@ Add Project
 @endcomponent
 <div class="row">
     <div class="col-md-8">
-        @if(session('success'))
+        {{-- @if(session('success'))
         <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show"
             role="alert">
             <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - {{ session('success') }}
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        @endif
+        @endif --}}
     </div>
     <div class="col-xxl-6">
         <h5 class="mb-3">Pills Justified Tabs</h5>
@@ -102,7 +108,7 @@ Add Project
                                     <form action="{{ route('advertiser.storeStep3') }}" method="POST">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="keywords" class="form-label">Introduce the keywords
                                                         (separated by comma) <span class="text-danger"
@@ -118,7 +124,7 @@ Add Project
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-md-6 ">
                                                 <div class="mb-3">
                                                     <label for="trackkeywords">Where do you want to track your
                                                         keywords?<span class="text-danger"
@@ -138,11 +144,14 @@ Add Project
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-12">
+                                                <label for="Project_Objectives">In what type of device do you want
+                                                    to keep track of the results?<span class="text-danger"
+                                                        style="font-size: 16px;"> *</span></label>
+                                            </div>
+                                            <div class="col-12">
                                                 <div class="mb-3">
-                                                    <label for="Project_Objectives">In what type of device do you want
-                                                        to keep track of the results?<span class="text-danger"
-                                                            style="font-size: 16px;"> *</span></label>
+
                                                     <input name="track_device" type="radio" class="btn-check"
                                                         id="desktop" value="desktop" {{ old('track_device') == 'desktop' ? 'checked' : '' }}>
                                                     <label class="btn btn-outline-danger" for="desktop"><i

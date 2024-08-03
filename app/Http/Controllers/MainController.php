@@ -175,4 +175,36 @@ class MainController extends Controller
         Flashy::mutedDark(' ✅Email updated successfully.', '#');
         return back()->with('success', 'Email updated successfully.');
     }
+
+    public function updateNamePhoneCountry(Request $request)
+{
+
+    // return $request;
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'phone_number' => 'nullable|string|max:15',
+        'country' => 'nullable|string|max:255',
+    ]);
+
+    $user = Auth::user();
+    // Update or create the user details
+    $user->updateOrCreate(
+        ['id' => $user->id], // Attributes to find the existing record
+        [
+            'name' => $request->name,
+            'phone_number' => $request->phone_number ?? $user->phone_number,
+            'country' => $request->country ?? $user->country,
+        ]
+    );
+
+    Flashy::mutedDark(' ✅Personal Detail Added successfully.', '#');
+
+    return redirect()->back()->with('success', 'Personal Detail Added successfully.');
+}
+
+
+    public function billDetail(){
+        return view('advertiser.bill-detail.index');
+
+    }
 }

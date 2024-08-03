@@ -23,7 +23,7 @@ wallet
                 <div class="d-flex justify-content-between">
                     <div>
                         <h3 class="fw-medium text-muted mb-0">Added credit</h3>
-                        <h2 class="mt-4 ff-secondary fw-semibold">0 €
+                        <h2 class="mt-4 ff-secondary fw-semibold">0 $
                         </h2>
 
                     </div>
@@ -44,8 +44,8 @@ wallet
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3 class="fw-medium text-muted mb-0">Given credit</h3>
-                        <h2 class="mt-4 ff-secondary fw-semibold">0 €
+                        <h3 class="fw-medium text-muted mb-0">Reserved</h3>
+                        <h2 class="mt-4 ff-secondary fw-semibold">0 $
                         </h2>
 
                     </div>
@@ -66,8 +66,8 @@ wallet
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3 class="fw-medium text-muted mb-0">Transfered credit from Publisher account</h3>
-                        <h2 class="mt-4 ff-secondary fw-semibold">0 €
+                        <h3 class="fw-medium text-muted mb-0">Total Spend</h3>
+                        <h2 class="mt-4 ff-secondary fw-semibold">0 $
                         </h2>
                     </div>
                     <div>
@@ -81,6 +81,28 @@ wallet
             </div><!-- end card body -->
         </div>
     </div>
+    <div class="col-xxl-3 col-sm-6">
+       <a href="{{ route('advertiser.bill.detail') }}">
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="fw-medium text-muted mb-0">Add Billing Detail</h3>
+                        <h2 class="mt-4 ff-secondary fw-semibold">0 $
+                        </h2>
+                    </div>
+                    <div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-info-subtle text-info rounded-circle fs-4">
+                                <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div>
+       </a>
+    </div>
 </div>
 
 
@@ -89,7 +111,7 @@ wallet
         <div class="card" id="ticketsList">
             <div class="card-header border-0">
                 <div class="d-flex align-items-center">
-                    <h5 class="card-title mb-0 flex-grow-1">Credit movements</h5>
+                    <h5 class="card-title mb-0 flex-grow-1">Transaction History</h5>
                     <div class="flex-shrink-0">
                         <div class="d-flex flex-wrap gap-2">
                             <button class="btn btn-danger add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>Add credit</button>

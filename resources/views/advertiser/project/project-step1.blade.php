@@ -99,7 +99,10 @@ Add Project
                                             <!-- Project Categories -->
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
-                                                    <label for="Project_categories">Project categories <span class="text-danger">*</span></label>
+                                                    <div>
+
+                                                        <label for="Project_categories">Project categories <span class="text-danger">*</span></label>
+                                                    </div>
                                                     <select required class="js-example-basic-multiple" name="categories[]" multiple="multiple" id="Project_categories">
                                                         @foreach (config('categories.categories') as $category)
                                                         <option value="{{ $category['label'] }}" {{ in_array($category['label'], old('categories', [])) ? 'selected' : '' }}>
@@ -118,7 +121,10 @@ Add Project
                                             <!-- Project Languages -->
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
-                                                    <label for="Project_Language">Language(s) of your project <span class="text-danger">*</span></label>
+                                                    <div>
+
+                                                        <label for="Project_Language">Language(s) of your project <span class="text-danger">*</span></label>
+                                                    </div>
                                                     <select required class="js-example-basic-multiple" name="language[]" multiple="multiple" id="Project_Language">
                                                         <option value="" disabled>Select one or more options</option>
                                                         <option value="catalan" {{ in_array('catalan', old('language', [])) ? 'selected' : '' }}>Catalán</option>
@@ -142,7 +148,10 @@ Add Project
                                             <!-- Project Countries -->
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
-                                                    <label for="Project_Country">Country or countries of your project <span class="text-danger">*</span></label>
+                                                    <div>
+
+                                                        <label for="Project_Country">Country or countries of your project <span class="text-danger">*</span></label>
+                                                    </div>
                                                     <select required class="js-example-basic-multiple" name="countries[]" multiple="multiple" id="Project_Country">
                                                         @foreach(config('countries.countries') as $country)
                                                         <option value="{{ $country }}" {{ in_array($country, old('countries', [])) ? 'selected' : '' }}>
@@ -161,7 +170,10 @@ Add Project
                                             <!-- Project Objectives -->
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
-                                                    <label for="Project_Objectives">Objectives of your project <span class="text-danger">*</span></label>
+                                                    <div>
+
+                                                        <label for="Project_Objectives">Objectives of your project <span class="text-danger">*</span></label>
+                                                    </div>
                                                     <select required class="js-example-basic-multiple" name="objectives[]" multiple="multiple" id="Project_Objectives">
                                                         <option value="" disabled>Select one or more options</option>
                                                         <option value="Increase SEO traffic" {{ in_array('Increase SEO traffic', old('objectives', [])) ? 'selected' : '' }}>Increase SEO traffic</option>
@@ -178,7 +190,7 @@ Add Project
                                             </div>
 
                                             <!-- Submit Button -->
-                                            <div class="col-12">
+                                            <div class="col-12 mt-4">
                                                 <button type="submit" class="btn btn-primary">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                             </div>
                                         </div>

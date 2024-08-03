@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @section('title') Profile-Setting | publishers @endsection
 @section('content')
+@section('css')
+<!-- Include the intl-tel-input CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<style>
+    .iti {
+        width: 100%;
+    }
+</style>
+
+
+@endsection
 @component('components.breadcrumb')
 @slot('li_1')
 Publishers
@@ -64,18 +75,25 @@ Profile-Setting
                     <!--end tab-pane-->
                     <div class="tab-pane active" id="changePassword" role="tabpanel">
 
-                        <form action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.password') : route('publishers.update.password') }}" method="POST">
+                        <form
+                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.password') : route('publishers.update.password') }}"
+                            method="POST">
                             @csrf
                             <div class="row g-2">
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="current-password">Old Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input required value="{{ old('password') }}" name="password" type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter old password" id="current-password">
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="toggle-password-visibility"><i class="ri-eye-fill align-middle"></i></button>
+                                            <input required value="{{ old('password') }}" name="password"
+                                                type="password" class="form-control pe-5 password-input"
+                                                placeholder="Enter old password" id="current-password">
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                type="button" id="toggle-password-visibility"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('password')
-                                        <span class="text-danger" >
+                                        <span class="text-danger">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
@@ -85,11 +103,16 @@ Profile-Setting
                                     <div class="mb-3">
                                         <label class="form-label" for="new-password">New Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input required value="{{ old('new_password') }}" name="new_password" type="password" class="form-control pe-5 password-input " onpaste="return false" placeholder="Enter new password" id="new-password">
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="toggle-password-visibility"><i class="ri-eye-fill align-middle"></i></button>
+                                            <input required value="{{ old('new_password') }}" name="new_password"
+                                                type="password" class="form-control pe-5 password-input "
+                                                placeholder="Enter new password" id="new-password">
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                type="button" id="toggle-password-visibility"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('new_password')
-                                        <span class="text-danger" >
+                                        <span class="text-danger">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
@@ -97,13 +120,20 @@ Profile-Setting
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label class="form-label" for="new-password-confirmation">Confirm Password</label>
+                                        <label class="form-label" for="new-password-confirmation">Confirm
+                                            Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input required name="new_password_confirmation" value="{{ old('new_password_confirmation') }}" type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Confirm new password" id="new-password-confirmation">
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="toggle-password-visibility"><i class="ri-eye-fill align-middle"></i></button>
+                                            <input required name="new_password_confirmation"
+                                                value="{{ old('new_password_confirmation') }}" type="password"
+                                                class="form-control pe-5 password-input"
+                                                placeholder="Confirm new password" id="new-password-confirmation">
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                                                type="button" id="toggle-password-visibility"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('new_password_confirmation')
-                                        <span class="text-danger" >
+                                        <span class="text-danger">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
@@ -137,17 +167,22 @@ Profile-Setting
 
                 </ul>
             </div>
+
             <div class="card-body p-4">
                 <div class="tab-content">
                     <div class="tab-pane active " id="personalDetails" role="tabpanel">
 
-                        <form action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.email') : route('publishers.update.email') }}" method="POST">
+                        <form
+                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.email') : route('publishers.update.email') }}"
+                            method="POST">
                             @csrf
                             <div class="row">
+
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="old_email" class="form-label">Old Email Address</label>
-                                        <input required name="old_email" type="email" class="form-control @error('old_email') is-invalid @enderror" id="old_email"
+                                        <input required name="old_email" type="email"
+                                            class="form-control @error('old_email') is-invalid @enderror" id="old_email"
                                             placeholder="Enter Old Email" value="{{ old('old_email') }}">
                                         @error('old_email')
                                         <span class="invalid-feedback" role="alert">
@@ -160,7 +195,8 @@ Profile-Setting
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="new_email" class="form-label">New Email Address</label>
-                                        <input required name="new_email" type="email" class="form-control @error('new_email') is-invalid @enderror" id="new_email"
+                                        <input required name="new_email" type="email"
+                                            class="form-control @error('new_email') is-invalid @enderror" id="new_email"
                                             placeholder="Enter New Email" value="{{ old('new_email') }}">
                                         @error('new_email')
                                         <span class="invalid-feedback" role="alert">
@@ -169,6 +205,7 @@ Profile-Setting
                                         @enderror
                                     </div>
                                 </div>
+
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-dark">Update</button>
@@ -177,6 +214,68 @@ Profile-Setting
                             </div>
                             <!--end row-->
                         </form>
+                        @auth
+                        <form class="mt-4"
+                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.addNamecountry') : '#' }}"
+                            method="POST">
+                            @csrf
+                            <div class="row">
+                                @if (Auth::user()->role == 'advertiser')
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input name="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" id="name"
+                                        value="{{ auth::user()->name }}">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone_number" class="form-label">Add Phone Number</label>
+                                    <div>
+                                        <input name="phone_number" type="text"
+                                            class="form-control w-100 @error('phone_number') is-invalid @enderror"
+                                            id="phone_number" placeholder="Add Phone Number"
+                                            value="{{ old('phone_number') }}">
+
+                                    </div>
+                                    @error('phone_number')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div>
+                                        <label for="country">Country</label>
+                                    </div>
+                                    <select
+                                        class="js-example-basic-multiple form-control @error('country') is-invalid @enderror"
+                                        name="country" id="country">
+                                        <option value="" selected disabled>Select Country</option>
+                                        @foreach(config('countries.countries') as $country)
+                                        <option value="{{ $country }}" {{ $country==auth::user()->country ?
+                                            'selected' : '' }}>
+                                            {{ $country }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-dark">Update</button>
+                                </div>
+                                @endif
+
+                            </div>
+                        </form>
+                        @endauth
 
                     </div>
 
@@ -189,4 +288,22 @@ Profile-Setting
 </div>
 
 @endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
 
+<!-- Initialize intl-tel-input -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var input = document.querySelector("#phone_number");
+        window.intlTelInput(input, {
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+    });
+</script>
+@endsection

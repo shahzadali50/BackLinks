@@ -62,5 +62,7 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
+    Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
 
 });
