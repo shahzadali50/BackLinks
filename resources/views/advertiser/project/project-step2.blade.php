@@ -12,7 +12,7 @@
         @endslot
     @endcomponent
     <div class="row">
-        <div class="col-md-8">
+        {{-- <div class="col-md-8">
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible bg-success text-white alert-label-icon fade show"
                     role="alert">
@@ -21,7 +21,7 @@
                         aria-label="Close"></button>
                 </div>
             @endif
-        </div>
+        </div> --}}
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -113,10 +113,10 @@
 
 
                                                 <div class="col-12 mt-4">
-                                                    <button type="submit" class="btn btn-primary">Next <i
-                                                            class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                                                    <a class="btn btn-dark ms-3" href="{{ route('advertiser.project.list') }}"><i class="fa fa-times pe-1"
+                                                    <a class="btn btn-dark " href="{{ route('advertiser.project.list') }}"><i class="fa fa-times pe-1"
                                                             aria-hidden="true"></i>Cancel</a>
+                                                    <button type="submit" class="btn btn-primary ms-3">Next <i
+                                                            class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </form>

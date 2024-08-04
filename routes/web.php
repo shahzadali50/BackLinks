@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProjectController;
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
 // advertiser Routes
@@ -64,5 +66,18 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
     Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
+    Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
+    Route::get('/chat', [MainController::class, 'chat'])->name('chat');
 
+});
+
+Route::get('/run-migration', function () {
+    // Run the migration command
+    Artisan::call('migrate');
+
+    // Get the output from the migration command
+    $output = Artisan::output();
+
+    // Return the output to the browser or redirect back with a message
+    return redirect()->back()->with('success', "Migration executed successfully. Output: " . nl2br($output));
 });

@@ -3,12 +3,12 @@
 Projects List
 @endsection
 @section('css')
-    <!--datatable css-->
-    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-    <!--datatable responsive css-->
-    <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" rel="stylesheet"
-        type="text/css" />
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+<!--datatable css-->
+<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+<!--datatable responsive css-->
+<link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" rel="stylesheet"
+    type="text/css" />
+<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -22,21 +22,24 @@ Projects List
 @endcomponent
 
 <div class="row">
+
+
     <div class="col-md-8 py-2">
-        
+
         @if(session('success'))
-        <div class="alert alert-success alert-dismissible bg-success text-white alert-label-icon fade show"
+        {{-- <div class="alert alert-success alert-dismissible bg-success text-white alert-label-icon fade show"
             role="alert">
             <i class="ri-check-double-line label-icon"></i>
             <strong>Success</strong> - {{ session('success') }}
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        </div> --}}
         @elseif(session('error'))
         <!-- Danger Alert -->
         <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
             <strong>Error</strong> - {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss=" alert" aria-label="Close"></button>
         </div>
+        {{-- delete --}}
         @elseif(session('delete'))
         <div class="alert alert-danger alert-dismissible bg-danger text-white alert-label-icon fade show" role="alert">
             <i class="ri-check-double-line label-icon"></i><strong> {{ session('delete') }}</strong>
@@ -51,11 +54,11 @@ Projects List
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-               <div class="d-flex justify-content-between">
-                <h3>Project List</h3>
-                <a href="{{ route('advertiser.projectStep1') }}" class="btn btn-primary waves-effect waves-light">
-                    <i class="fa fa-plus"></i> Add project</a>
-               </div>
+                <div class="d-flex justify-content-between">
+                    <h3>Project List</h3>
+                    <a href="{{ route('advertiser.projectStep1') }}" class="btn btn-primary waves-effect waves-light">
+                        <i class="fa fa-plus"></i> Add project</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -67,10 +70,10 @@ Projects List
                                 <th>Categories</th>
                                 <th>Languages</th>
                                 <th>Countries</th>
-                                <th>Objectives</th>
+                                {{-- <th>Objectives</th> --}}
                                 <th>Competitors</th>
                                 <th>Keywords</th>
-                                <th>Track Keywords</th>
+                                {{-- <th>Track Keywords</th> --}}
                                 <th>Track Device</th>
                                 <th>Action</th>
                             </tr>
@@ -92,64 +95,66 @@ Projects List
                             $countriesList = is_array($countries) ? implode(', ', $countries) : $countries;
                             $objectivesList = is_array($objectives) ? implode(', ', $objectives) : $objectives;
                             $competitorsList = is_array($competitors) ? implode(', ', $competitors) : $competitors;
-                            $trackkeywordsList = is_array($trackkeywords) ? implode(', ', $trackkeywords) : $trackkeywords;
+                            $trackkeywordsList = is_array($trackkeywords) ? implode(', ', $trackkeywords) :
+                            $trackkeywords;
                             @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $project->name }}</td>
-                               <td> <button style="padding: 0px; width:21px; height:21px;"
-                                type="button" class="btn btn-dark" data-bs-toggle="tooltip"
-                                data-bs-placement="right" title="{{ $categoriesList }}">
-                                <i class='bx bx-category'></i>
-                            </button></td>
+                                <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $categoriesList }}">
+                                        <i class='bx bx-category'></i>
+                                    </button></td>
                                 {{-- <td>{{ $categoriesList }}</td> --}}
                                 {{-- <td>{{ $languagesList }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-info" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $languagesList }}">
-                                    <i class='bx bx-blanket' ></i>
-                                </button></td>
+                                <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $languagesList }}">
+                                        <i class='bx bx-blanket'></i>
+                                    </button></td>
                                 {{-- <td>{{ $countriesList }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-success" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $countriesList }}">
-                                    <i class='bx bx-world' ></i>
-                                </button></td>
+                                <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $countriesList }}">
+                                        <i class='bx bx-world'></i>
+                                    </button></td>
                                 {{-- <td>{{ $objectivesList }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-secondary" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $objectivesList }}">
-                                    <i class='bx bx-objects-horizontal-left'></i>
-                                </button></td>
+                                {{-- <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $objectivesList }}">
+                                        <i class='bx bx-objects-horizontal-left'></i>
+                                    </button></td> --}}
                                 {{-- <td>{{ $competitorsList }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-warning" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $competitorsList }}">
-                                    <i class='bx bxs-component'></i>
-                                </button></td>
+                                <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $competitorsList }}">
+                                        <i class='bx bxs-component'></i>
+                                    </button></td>
                                 {{-- <td>{{ $project->keywords }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-warning" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $project->keywords }}">
-                                    <i class='bx bx-dialpad-alt' ></i>
-                                </button></td>
+                                <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $project->keywords }}">
+                                        <i class='bx bx-dialpad-alt'></i>
+                                    </button></td>
                                 {{-- <td>{{ $trackkeywordsList }}</td> --}}
-                                <td> <button style="padding: 0px; width:21px; height:21px;"
-                                    type="button" class="btn btn-danger" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" title="{{ $trackkeywordsList }}">
-                                    <i class='bx bx-git-repo-forked'></i>
+                                {{-- <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
+                                        class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="{{ $trackkeywordsList }}">
+                                        <i class='bx bx-git-repo-forked'></i>
 
-                                </button></td>
+                                    </button></td> --}}
                                 <td>{{ $project->track_device }}</td>
                                 <td>
                                     <div class="dropdown d-inline-block">
-                                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
+                                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ri-more-fill align-middle"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <form action="{{ route('advertiser.project.delete',$project->id) }}" method="POST">
+                                                <form action="{{ route('advertiser.project.delete',$project->id) }}"
+                                                    method="POST">
                                                     @csrf
 
                                                     <button type="submit" class="dropdown-item edit-item-btn"
@@ -171,16 +176,55 @@ Projects List
         </div>
     </div>
 </div>
+
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center p-5">
+                <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
+                    colors="primary:#121331,secondary:#08a88a" style="width:120px;height:120px">
+                </lord-icon>
+
+                <div class="mt-4">
+                    <h4 class="mb-3">Thank You </h4>
+                    <h3 class="text-muted mb-4">Project created successfully! <img style="width: 30px;"
+                            class="img-fluid " src="{{ url('build/images/add-web/tick.svg') }}" alt=""> </h3>
+                    <div class="hstack gap-2 justify-content-center">
+                        <a href="javascript:void(0);" class="btn btn-soft-success" data-bs-dismiss="modal"><i
+                                class="ri-close-line me-1 align-middle"></i> Close</a>
+                        <a href="{{ route('advertiser.projectStep1') }}" class="btn btn-primary">Add More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        // Check if the session has a success message and trigger the modal
+        @if(session('success'))
+            var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
+                keyboard: false
+            });
+            myModal.show();
+        @endif
+    });
+</script>
 @endsection

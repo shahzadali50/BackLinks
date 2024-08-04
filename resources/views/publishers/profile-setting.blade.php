@@ -238,7 +238,7 @@ Profile-Setting
                                         <input name="phone_number" type="text"
                                             class="form-control w-100 @error('phone_number') is-invalid @enderror"
                                             id="phone_number" placeholder="Add Phone Number"
-                                            value="{{ old('phone_number') }}">
+                                            value="{{ auth::user()->phone_number }}">
 
                                     </div>
                                     @error('phone_number')

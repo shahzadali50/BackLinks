@@ -80,6 +80,12 @@
                                 <i class="fa fa-life-ring" aria-hidden="true"></i> <span>Contact Support</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('publishers.KYC') ? 'active' : '' }}"
+                                href="{{ route('publishers.KYC') }}">
+                                <i class="fa fa-yoast" aria-hidden="true"></i></i><span>KYC Application</span>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('publishers.ProfileSetting') ? 'active' : '' }}"
@@ -170,6 +176,8 @@
                     @elseif(Auth::user()->role == 'advertiser')
                         <!-- Advertiser Menu Items -->
                         {{-- Home --}}
+                         <!-- Chat Menu Item ✨-->
+                       
                         <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('advertiser.dashboard') ? 'active' : '' }}"
                                 href="{{ route('advertiser.dashboard') }}">
@@ -210,6 +218,12 @@
                             <a class="nav-link menu-link {{ request()->routeIs('advertiser.wallet') ? 'active' : '' }}"
                                 href="{{ route('advertiser.wallet') }}">
                                 <i class="fa fa-google-wallet" aria-hidden="true"></i><span>Wallet</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.KYC') ? 'active' : '' }}"
+                                href="{{ route('advertiser.KYC') }}">
+                                <i class="fa fa-yoast" aria-hidden="true"></i></i><span>KYC Application</span>
                             </a>
                         </li>
 

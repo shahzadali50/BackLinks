@@ -64,7 +64,7 @@ Add Project
         @endif --}}
     </div>
     <div class="col-xxl-6">
-        <h5 class="mb-3">Pills Justified Tabs</h5>
+        
         <div class="card">
             <div class="card-body">
                 <ul class="nav nav-pills nav-justified mb-3" role="tablist">
@@ -91,14 +91,9 @@ Add Project
                         <div class="col-12">
                             <div>
                                 <div class="card-header">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span style="font-size: 18px;" class="badge badge-label bg-warning"><i
-                                                class="mdi mdi-circle-medium"></i> Step-3</span>
-                                        <div>
-                                            <a class="btn btn-dark" href="{{ route('advertiser.project.list') }}"><i
-                                                    class="fa fa-times pe-1" aria-hidden="true"></i>Cancel</a>
-                                        </div>
-                                    </div>
+                                    <span style="font-size: 18px;" class="badge badge-label bg-warning"><i
+                                            class="mdi mdi-circle-medium"></i> Step-3</span>
+
                                     <p style="font-weight: 700" class="text-muted mb-0 py-3">Please complete the data.
                                         Fields marked with <span class="text-danger" style="font-size: 16px">*</span>
                                         are required.
@@ -176,7 +171,11 @@ Add Project
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary">Finish <i
+
+                                                    <a class="btn btn-dark" href="{{ route('advertiser.project.list') }}"><i
+                                                            class="fa fa-times pe-1" aria-hidden="true"></i>Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary ms-3">Finish <i
                                                         class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                             </div>
                                         </div>

@@ -17,13 +17,11 @@ Add Bill Detail
 @endslot
 @endcomponent
 <div class="row">
-    <div class="col-lg-10 ">
+    <div class="col-12 ">
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header ">
                 <h4>Add credit</h4>
-                <div>
-                    <a href="{{ route('advertiser.wallet') }}" class="btn btn-dark"> <i class="fa fa-arrow-left"></i> back</a>
-                </div>
+
             </div>
             <div class="card-body">
 
@@ -110,9 +108,12 @@ Add Bill Detail
                         </div>
                         <div class="col-12 mt-3">
                             <button type="" class="btn btn-primary btn-lg">Save</button>
+
+                                <a href="{{ route('advertiser.wallet') }}" class="btn btn-dark btn-lg ms-2"> <i class="fa fa-arrow-left"></i> back</a>
+
                         </div>
                     </div>
-              
+
             </div>
         </div>
     </div>

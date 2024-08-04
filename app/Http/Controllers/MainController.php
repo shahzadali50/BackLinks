@@ -86,7 +86,7 @@ class MainController extends Controller
     }
     public function chat()
     {
-        return view('publishers.chat');
+        return view('chat');
     }
     public function sponsoredList()
     {
@@ -197,14 +197,18 @@ class MainController extends Controller
         ]
     );
 
-    Flashy::mutedDark(' ✅Personal Detail Added successfully.', '#');
+    Flashy::mutedDark('  ✅User Detail Added successfully.', '#');
 
-    return redirect()->back()->with('success', 'Personal Detail Added successfully.');
+    return redirect()->back()->with('success', 'User Detail Added successfully.');
 }
 
 
     public function billDetail(){
         return view('advertiser.bill-detail.index');
+
+    }
+    public function KYC(){
+        return view('kyc.index');
 
     }
 }

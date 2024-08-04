@@ -53,12 +53,10 @@ Add Project
                         <div class="col-12">
                             <div>
                                 <div class="card-header">
-                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex ">
                                         <span style="font-size: 18px;" class="badge badge-label bg-warning "><i
                                             class="mdi mdi-circle-medium"></i> Step-1</span>
-                                            <div>
-                                                <a class="btn btn-dark" href="{{ route('advertiser.project.list') }}"><i class="fa fa-times pe-1" aria-hidden="true"></i>Cancel</a>
-                                            </div>
+
                                     </div>
 
                                     <p style="font-weight: 700" class="text-muted mb-0 py-3">Please complete the data.
@@ -191,7 +189,10 @@ Add Project
 
                                             <!-- Submit Button -->
                                             <div class="col-12 mt-4">
-                                                <button type="submit" class="btn btn-primary">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                                <a class="btn btn-dark " href="{{ route('advertiser.project.list') }}"><i class="fa fa-times pe-1" aria-hidden="true"></i>Cancel</a>
+                                                <button type="submit " class="btn btn-primary  ms-3 ">Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+
+
                                             </div>
                                         </div>
                                     </form>
