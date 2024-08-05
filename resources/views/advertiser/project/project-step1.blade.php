@@ -85,8 +85,8 @@ Add Project
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label for="project_url" class="form-label">URL of website <span class="text-danger">*</span></label>
-                                                    <input required value="{{ old('url_website') }}" name="url_website" type="url" class="form-control" id="project_url" placeholder="Enter URL of website">
-                                                    @error('url_website')
+                                                    <input required value="{{ old('url') }}" name="url" type="url" class="form-control" id="project_url" placeholder="Enter URL of website">
+                                                    @error('url')
                                                     <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
                                                         <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
                                                     </div>

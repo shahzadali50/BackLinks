@@ -60,7 +60,9 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/projects/create/step-1', [ProjectController::class, 'storeStep1'])->name('storeStep1');
     Route::post('/projects/create/step-2', [ProjectController::class, 'storeStep2'])->name('storeStep2');
     Route::post('/projects/create/step-3', [ProjectController::class, 'storeStep3'])->name('storeStep3');
-    Route::post('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+    // Route::post('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+    Route::delete('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');

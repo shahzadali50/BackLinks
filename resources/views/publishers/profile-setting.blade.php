@@ -1,35 +1,25 @@
 @extends('layouts.app')
-@section('title') Profile-Setting | publishers @endsection
+@section('title')
+    Profile-Setting | publishers
+@endsection
 @section('content')
 @section('css')
-<!-- Include the intl-tel-input CSS and JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
-<style>
-    .iti {
-        width: 100%;
-    }
-</style>
-
-
+    <!-- Include the intl-tel-input CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <style>
+        .iti {
+            width: 100%;
+        }
+    </style>
 @endsection
 @component('components.breadcrumb')
-@slot('li_1')
-Publishers
-@endslot
-@slot('title')
-Profile-Setting
-@endslot
+    @slot('li_1')
+        Publishers
+    @endslot
+    @slot('title')
+        Profile-Setting
+    @endslot
 @endcomponent
-
-<div class="row mb-4">
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible bg-success text-white alert-label-icon fade show" role="alert">
-        <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - {{ session('success') }}
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    @endif
-</div>
 <div class="position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg profile-setting-img">
         <img src="{{ URL::asset('build/images/profile-bg.jpg') }}" class="profile-wid-img" alt="">
@@ -93,9 +83,9 @@ Profile-Setting
                                                     class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('password')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -112,9 +102,9 @@ Profile-Setting
                                                     class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('new_password')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -133,9 +123,9 @@ Profile-Setting
                                                     class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                         @error('new_password_confirmation')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -182,12 +172,13 @@ Profile-Setting
                                     <div class="mb-3">
                                         <label for="old_email" class="form-label">Old Email Address</label>
                                         <input required name="old_email" type="email"
-                                            class="form-control @error('old_email') is-invalid @enderror" id="old_email"
-                                            placeholder="Enter Old Email" value="{{ old('old_email') }}">
+                                            class="form-control @error('old_email') is-invalid @enderror"
+                                            id="old_email" placeholder="Enter Old Email"
+                                            value="{{ old('old_email') }}">
                                         @error('old_email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -196,12 +187,13 @@ Profile-Setting
                                     <div class="mb-3">
                                         <label for="new_email" class="form-label">New Email Address</label>
                                         <input required name="new_email" type="email"
-                                            class="form-control @error('new_email') is-invalid @enderror" id="new_email"
-                                            placeholder="Enter New Email" value="{{ old('new_email') }}">
+                                            class="form-control @error('new_email') is-invalid @enderror"
+                                            id="new_email" placeholder="Enter New Email"
+                                            value="{{ old('new_email') }}">
                                         @error('new_email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -215,66 +207,66 @@ Profile-Setting
                             <!--end row-->
                         </form>
                         @auth
-                        <form class="mt-4"
-                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.addNamecountry') : '#' }}"
-                            method="POST">
-                            @csrf
-                            <div class="row">
-                                @if (Auth::user()->role == 'advertiser')
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input name="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" id="name"
-                                        value="{{ auth::user()->name }}">
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone_number" class="form-label">Add Phone Number</label>
-                                    <div>
-                                        <input name="phone_number" type="text"
-                                            class="form-control w-100 @error('phone_number') is-invalid @enderror"
-                                            id="phone_number" placeholder="Add Phone Number"
-                                            value="{{ auth::user()->phone_number }}">
+                            <form class="mt-4"
+                                action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.addNamecountry') : '#' }}"
+                                method="POST">
+                                @csrf
+                                <div class="row">
+                                    @if (Auth::user()->role == 'advertiser')
+                                        <div class="col-md-6 mb-3">
+                                            <label for="name" class="form-label">Name</label>
+                                            <input name="name" type="text"
+                                                class="form-control @error('name') is-invalid @enderror" id="name"
+                                                value="{{ auth::user()->name }}">
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="phone_number" class="form-label">Add Phone Number</label>
+                                            <div>
+                                                <input name="phone_number" type="text"
+                                                    class="form-control w-100 @error('phone_number') is-invalid @enderror"
+                                                    id="phone_number" placeholder="Add Phone Number"
+                                                    value="{{ auth::user()->phone_number }}">
 
-                                    </div>
-                                    @error('phone_number')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div>
-                                        <label for="country">Country</label>
-                                    </div>
-                                    <select
-                                        class="js-example-basic-multiple form-control @error('country') is-invalid @enderror"
-                                        name="country" id="country">
-                                        <option value="" selected disabled>Select Country</option>
-                                        @foreach(config('countries.countries') as $country)
-                                        <option value="{{ $country }}" {{ $country==auth::user()->country ?
-                                            'selected' : '' }}>
-                                            {{ $country }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                    @error('country')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-dark">Update</button>
-                                </div>
-                                @endif
+                                            </div>
+                                            @error('phone_number')
+                                                <span class="text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div>
+                                                <label for="country">Country</label>
+                                            </div>
+                                            <select
+                                                class="js-example-basic-multiple form-control @error('country') is-invalid @enderror"
+                                                name="country" id="country">
+                                                <option value="" selected disabled>Select Country</option>
+                                                @foreach (config('countries.countries') as $country)
+                                                    <option value="{{ $country }}"
+                                                        {{ $country == auth::user()->country ? 'selected' : '' }}>
+                                                        {{ $country }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('country')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-dark">Update</button>
+                                        </div>
+                                    @endif
 
-                            </div>
-                        </form>
+                                </div>
+                            </form>
                         @endauth
 
                     </div>
@@ -284,15 +276,57 @@ Profile-Setting
             </div>
         </div>
     </div>
-    <!--end col-->
+
 </div>
+  {{-- Succcess modal when data add in data base 🛑 --}}
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-body text-center p-5">
+              {{-- <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
+                  colors="primary:#121331,secondary:#08a88a" style="width:120px;height:120px">
+              </lord-icon> --}}
+              <img style="width: 60px;"
+                          class="img-fluid " src="{{ url('build/images/add-web/tick.svg') }}" alt="">
+
+              <div class="mt-4">
+                  <h4 class="mb-3">Thank You </h4>
+                  <div>
+
+                  </div>
+                  <h3 id="statusMessage" class="text-muted mb-4">Project created successfully! <img style="width: 30px;"
+                          class="img-fluid " src="{{ url('build/images/add-web/tick.svg') }}" alt="">
+                  </h3>
+                  <div class="hstack gap-2 justify-content-center ">
+                    <a href="javascript:void(0);" class="btn btn-success" data-bs-dismiss="modal"><i
+                            class="ri-close-line me-1 align-middle"></i> Close</a>
+
+                </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
 
 @endsection
 @section('script')
 <script>
     $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
-        });
+        $('.js-example-basic-multiple').select2();
+    });
+    $(document).ready(function() {
+        @if (session('success'))
+            Swal.fire({
+                title: 'Thank You 👍',
+                text: '{{ session('success') }}',
+                icon: 'success'
+            });
+        @endif
+    });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>

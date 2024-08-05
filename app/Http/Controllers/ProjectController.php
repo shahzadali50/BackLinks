@@ -41,7 +41,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'project_name' => 'required',
-            'url_website' => 'required|url',
+            'url' => 'required|url',
             'categories' => 'required|array',
             'language' => 'required|array',
             'countries' => 'required|array',
@@ -49,7 +49,7 @@ class ProjectController extends Controller
         ]);
 
         $request->session()->put('project_step1', $request->only([
-            'project_name', 'url_website', 'categories', 'language', 'countries', 'objectives'
+            'project_name', 'url', 'categories', 'language', 'countries', 'objectives'
         ]));
         Flashy::mutedDark(' ✅ Step 1: Data has been saved successfully. ', '#');
 
@@ -82,7 +82,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->user_id = $userId;
         $project->name = $step1Data['project_name'];
-        $project->url = $step1Data['url_website'];
+        $project->url = $step1Data['url'];
         $project->categories = json_encode($step1Data['categories']);
         $project->languages = json_encode($step1Data['language']);
         $project->countries = json_encode($step1Data['countries']);
@@ -103,17 +103,15 @@ class ProjectController extends Controller
 
         return redirect()->route('advertiser.project.list')->with('success', 'Project created successfully!');
     }
-    public function projectDelete($id){
-        $website = Project::find($id);
-        if($website){
-            $website->delete();
-            Flashy::mutedDark('✅ Project information has been successfully deleted.', '#');
-            return redirect()->route('advertiser.project.list')->with('delete', 'Project information has been successfully deleted.');
-        }else{
-            Flashy::warning('�� Something went wrong while deleting the website.', '#');
-            return redirect()->route('advertiser.project.list')->with('error', 'Something went wrong while deleting the website.');
+    public function projectDelete($id)
+    {
+        $project = Project::find($id);
+        if ($project) {
+            $project->delete();
+            return response()->json(['success' => true, 'message' => 'Project information has been successfully deleted.']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Something went wrong while deleting the project.']);
         }
-
     }
 
     public function webList(Request $request){
