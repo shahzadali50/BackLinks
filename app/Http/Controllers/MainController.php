@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Website;
+use App\Models\FavouriteWeb;
 use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
@@ -209,6 +210,43 @@ class MainController extends Controller
     }
     public function KYC(){
         return view('kyc.index');
+
+    }
+
+    public function addFavouriteWeb(Request $request)
+    {
+        $request->validate([
+            'fileId' => 'required|exists:websites,id',
+        ]);
+
+        $userId = Auth::id();
+        $websiteId = $request->fileId;
+
+        // Check if the favorite snippet already exists
+        $existingFavourite = FavouriteWeb::where('user_id', $userId)
+            ->where('website_id', $websiteId)
+            ->first();
+
+        if ($existingFavourite) {
+            // If it exists, delete it
+            $existingFavourite->delete();
+            return response()->json(['success' => true, 'message' => 'Website removed from favourite']);
+        } else {
+            // If it does not exist, create it
+            FavouriteWeb::create([
+                'user_id' => $userId,
+                'website_id' => $websiteId,
+            ]);
+            return response()->json(['success' => true, 'message' => 'Website added to favourite']);
+        }
+    }
+    public function favouriteWeb(){
+        $userId = Auth::id();
+        $favouriteWebsites = FavouriteWeb::with('website')
+            ->where('user_id', $userId)
+            ->get();
+
+        return view('advertiser.favourite-website', compact('favouriteWebsites'));
 
     }
 }

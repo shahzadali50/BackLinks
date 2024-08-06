@@ -68,8 +68,12 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
     Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
-    Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
+    // if need then uncomment👇
+    // Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
+
+    Route::post('favourite/web/add', [MainController::class, 'addFavouriteWeb'])->name('add.favourite');
+    Route::get('favourite/websites', [MainController::class, 'favouriteWeb'])->name('favourireWeb');
 
 });
 
