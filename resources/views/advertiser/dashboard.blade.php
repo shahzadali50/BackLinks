@@ -9,10 +9,11 @@ Advertisers
 @endslot
 @slot('title')
 Home
+
 @endslot
 @endcomponent
 <div class="row">
     <h3>Welcome to {{ auth()->user()->name }}</h3>
-   
+
 @endsection
 

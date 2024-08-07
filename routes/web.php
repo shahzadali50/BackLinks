@@ -7,7 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\AddCreditController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PurchaseWebController;
 
 Route::get('/', [MainController::class, 'index'])->name('home');
 
@@ -64,10 +66,12 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::delete('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
 
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
+    Route::post('/purchase/web', [PurchaseWebController::class, 'purchase_web'])->name('purchase.web');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
     Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
+    Route::post('/add/credit', [AddCreditController::class, 'creditStore'])->name('credit.store');
     // if need then uncomment👇
     // Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');

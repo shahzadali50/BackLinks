@@ -52,8 +52,9 @@
         lor: #04AA6D;
         border-color: #04AA6D !important;
         color: #ffffff;
-        font-size: 1em;
-        width: 100px
+        font-size: 15px;
+        min-width: 119px;
+        font-weight: 900;
     }
 </style>
 

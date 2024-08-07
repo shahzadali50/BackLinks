@@ -73,11 +73,11 @@ Add Project
                                                 <div class="mb-3">
                                                     <label for="project_name" class="form-label">Project name <span class="text-danger">*</span></label>
                                                     <input required name="project_name" type="text" class="form-control" id="project_name" placeholder="Enter Project name" value="{{ old('project_name') }}">
-                                                    @error('project_name')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                    @enderror
+                                                        @error('project_name')
+                                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                        </div>
+                                                        @enderror
                                                 </div>
                                             </div>
 

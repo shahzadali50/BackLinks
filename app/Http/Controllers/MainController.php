@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Website;
+use App\Models\AddCredit;
 use App\Models\FavouriteWeb;
 use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
@@ -95,8 +96,11 @@ class MainController extends Controller
     }
     public function advertiserDashboard()
     {
+
+        // Pass the records and the total amount to the view
         return view('advertiser.dashboard');
     }
+
     public function wallet()
     {
         return view('advertiser.wallet');

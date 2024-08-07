@@ -34,10 +34,13 @@
 
             </div>
 
+
             <div class="d-flex align-items-center">
                 <div>
                    <a href="{{ route('advertiser.wallet') }}">
-                    <h4 class="mb-0 me-3 ">$200</h4>
+                    @if(Auth::user()->role=='advertiser')
+                    <h4 class="mb-0 me-3">${{ $totalAmount }}</h4>
+                    @endif
                    </a>
                 </div>
 

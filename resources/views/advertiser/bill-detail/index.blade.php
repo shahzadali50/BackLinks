@@ -26,15 +26,24 @@ Add Bill Detail
             <div class="card-body">
 
 
+                   <form action="{{ route('advertiser.credit.store') }}" method="POST">
+                    @csrf
                     <div class="row">
                         {{-- Amount --}}
                         <div class="col-12 mb-4">
-                            <label>Amount </label>
+                            <label for="Amount">Amount </label>
                             <div class="input-group">
 
-                                <span class="input-group-text" id="inputGroup-sizing-default">$</span>
-                                <input name="min_price" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <span class="input-group-text">$</span>
+                                <input id="Amount" name="amount" type="number" class="form-control" required>
+
                             </div>
+                            @error('amount')
+                            <div class=" mt-1 alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                            </div>
+                            @enderror
+
                         </div>
                         <div class="col-12 mb-4">
                             <!-- Accordions with Plus Icon -->
@@ -49,14 +58,19 @@ Add Bill Detail
                                         <div class="accordion-body">
                                             <div class="input-group">
 
-                                                <input name="min_price" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                                                <span class="input-group-text" id="inputGroup-sizing-default">Apply coupon</span>
+                                                <input name="coupon" type="number" class="form-control" >
+                                                <span class="input-group-text" >Apply coupon</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
+                            @error('coupon')
+                            <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                            </div>
+                            @enderror
 
                         </div>
                         {{-- Select your payment method --}}
@@ -67,7 +81,7 @@ Add Bill Detail
                         <div class="col-12 d-flex ">
                             <div class="mb-3 me-4">
 
-                                <input name="track_device" type="radio" class="btn-check" id="PayPal" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
+                                <input name="payment_method" type="radio" class="btn-check" id="PayPal" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
                                 <label class="btn btn-outline-white" for="PayPal">
                                     <div>
                                        <img style="width: 133px; height:133px;" class="img-fluid" src="{{ URL::asset('build/images/pay-bill/paypal.png') }}" alt="not">
@@ -81,7 +95,7 @@ Add Bill Detail
                             </div>
                             <div class="mb-3 ms-3">
 
-                                <input name="track_device" type="radio" class="btn-check" id="Credit_Card" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
+                                <input name="payment_method" type="radio" class="btn-check" id="Credit_Card" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
                                 <label class="btn btn-outline-white" for="Credit_Card">
                                     <div>
                                        <img style="width: 133px; height:133px;" class="img-fluid" src="{{ URL::asset('build/images/pay-bill/stripe.png') }}" alt="not">
@@ -94,7 +108,7 @@ Add Bill Detail
                             </div>
                             <div class="mb-3 ms-3">
 
-                                <input name="track_device" type="radio" class="btn-check" id="Bank_Transfer" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
+                                <input name="payment_method" type="radio" class="btn-check" id="Bank_Transfer" value="desktop" {{ old('track_device')=='desktop' ? 'checked' : '' }}>
                                 <label class="btn btn-outline-white" for="Bank_Transfer">
                                     <div>
                                        <img style="width: 133px; height:133px;" class="img-fluid" src="{{ URL::asset('build/images/pay-bill/bank-transfer-2.png') }}" alt="not">
@@ -107,12 +121,13 @@ Add Bill Detail
                             </div>
                         </div>
                         <div class="col-12 mt-3">
-                            <button type="" class="btn btn-primary btn-lg">Save</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
 
                                 <a href="{{ route('advertiser.wallet') }}" class="btn btn-dark btn-lg ms-2"> <i class="fa fa-arrow-left"></i> back</a>
 
                         </div>
                     </div>
+                   </form>
 
             </div>
         </div>
@@ -120,6 +135,18 @@ Add Bill Detail
 </div>
 @endsection
 @section('script')
+<script>
+    $(document).ready(function(){
+        @if(session('success'))
+        Swal.fire({
+                title: 'Thank You 👍',
+                text: '{{ session('success') }}',
+                icon: 'success'
+            });
+        @endif
+
+    })
+</script>
 
 @endsection
 

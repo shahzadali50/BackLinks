@@ -226,13 +226,6 @@
                                 <i class="fa fa-gratipay" aria-hidden="true"></i><span>Favourite</span>
                             </a>
                         </li>
-                        {{-- if need then ucomment 👇 --}}
-                        {{-- <li class="nav-item">
-                            <a class="nav-link menu-link {{ request()->routeIs('advertiser.KYC') ? 'active' : '' }}"
-                                href="{{ route('advertiser.KYC') }}">
-                                <i class="fa fa-yoast" aria-hidden="true"></i></i><span>KYC Application</span>
-                            </a>
-                        </li> --}}
 
 
                         <li class="nav-item">
