@@ -10,11 +10,16 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
+
+    {{-- Add the CSRF token meta tag --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- Include CSS --}}
     {{-- @include('layouts.head-css') --}}
     <x-head-css />
 
-
 </head>
+
 
 <body>
     <!-- Begin page -->

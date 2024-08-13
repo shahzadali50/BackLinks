@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AddCreditController;
@@ -15,16 +16,19 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 
 Route::get('/home', [MainController::class, 'checkAccount'])->name('dashboard');
 
+
 Auth::routes();
+
 Route::middleware(['auth'])->as('user.')->prefix('user')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-// publishers Routes
+// publishers Routes ðŸ›‘
 Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers')->group(function () {
 
     Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
     Route::get('/websites', [MainController::class, 'website'])->name('website');
+    Route::get('/website/detail/{encodedId}', [WebsiteController::class, 'website_detail'])->name('website.detail');
     Route::get('/websites/add/step-1', [WebsiteController::class, 'add_web_step1'])->name('add.websiteStep1');
     Route::get('/websites/add/step-2', [WebsiteController::class, 'add_web_step2'])->name('add.websiteStep2');
     Route::get('/websites/add/step-3', [WebsiteController::class, 'add_web_step3'])->name('add.websiteStep3');
@@ -49,7 +53,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
-// advertiser Routes
+// advertiser Routes ðŸ›‘
 Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser')->group(function () {
     Route::get('/home', [MainController::class, 'advertiserDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
@@ -67,12 +71,14 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
 
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
     Route::post('/purchase/web', [PurchaseWebController::class, 'purchase_web'])->name('purchase.web');
+    Route::get('purchase/website/list', [PurchaseWebController::class, 'puchaseWebList'])->name('purchase.webList');
+
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
     Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
     Route::post('/add/credit', [AddCreditController::class, 'creditStore'])->name('credit.store');
-    // if need then uncomment👇
+    // if need then uncommentðŸ‘‡
     // Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
 
@@ -80,6 +86,28 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::get('favourite/websites', [MainController::class, 'favouriteWeb'])->name('favourireWeb');
 
 });
+// admin Routes ðŸ›‘
+Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
+    Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
+    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
+    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    Route::get('/users/list', [AdminController::class, 'user_list'])->name('user.list');
+    Route::get('/users/detail/{encodedId}', [AdminController::class, 'user_detail'])->name('user.detail');
+    Route::delete('/user-delete/{id}', [AdminController::class, 'user_delete'])->name('user.delete');
+    Route::get('/websites/list', [AdminController::class, 'website_list'])->name('website.list');
+    Route::get('/websites/details/{encodedId}', [AdminController::class, 'website_detail'])->name('website.detail');
+    Route::get('/websites/approve', [AdminController::class, 'website_approve'])->name('websites.approve');
+    Route::get('/websites/pending', [AdminController::class, 'website_pending'])->name('websites.pending');
+    Route::get('/website/rejected', [AdminController::class, 'website_rejected'])->name('website.rejected');
+
+    Route::post('/website/status', [AdminController::class, 'change_status'])->name('website.status');
+
+
+
+});
+
+
 
 Route::get('/run-migration', function () {
     // Run the migration command

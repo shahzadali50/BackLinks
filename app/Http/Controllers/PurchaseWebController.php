@@ -51,8 +51,23 @@ class PurchaseWebController extends Controller
         }
         // Return a JSON response indicating insufficient credit
         return response()->json([
-           'success' => false,
-           'message' => 'Please add Credit to purchase this website ',
+            'success' => false,
+            'message' => 'Please add Credit to purchase this website ',
         ], 400); // 403 Forbidden
+    }
+
+    public function puchaseWebList()
+    {
+
+        $userId = auth()->id();
+
+        $purchaseWebList = PurchaseWeb::with('website')
+            ->where('user_id', $userId)
+            ->get();
+        // return $purchaseWebList;
+         // Extract websites from the purchases
+    $websites = $purchaseWebList->pluck('website');
+
+    return view('advertiser.website.purchase-web-list', compact('websites'));
     }
 }

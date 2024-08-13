@@ -857,6 +857,10 @@
                         <a class="dropdown-item" href="{{ route('advertiser.ProfileSetting') }}"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
+                                @elseif (auth()->user()->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('admin.ProfileSetting') }}"><i
+                                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Profile</span></a>
                         @endif
 
                         <a class="dropdown-item " href="javascript:void();"

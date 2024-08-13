@@ -17,7 +17,7 @@
 <script src="{{ URL::asset('build/libs/prismjs/prism.js') }}"></script>
 <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @include('flashy::message')
-</script>
+</script>   
 @yield('script')
 @yield('script-bottom')
 

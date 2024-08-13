@@ -90,46 +90,39 @@ Add Web
 @endslot
 @endcomponent
 <div class="row">
-    <div class="col-md-8 col-12 py-2">
+    {{-- <div class="col-md-8 col-12 py-2">
         @if(session('success'))
          <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show" role="alert">
              <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - {{ session('success') }}
              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>
          @endif
-     </div>
+     </div> --}}
     <div class="col-md-10">
 
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header ">
                 <h3 class="mb-1 ">
                     2. Complete the data</h3>
-                <a href="{{ route('publishers.website') }}" class="btn btn-dark">
-                    <i class="fa fa-arrow-left me-1" aria-hidden="true"></i></i>Cancel
 
-                </a>
             </div>
             <div class="card-body">
                 <form action="{{ route('publishers.form.postStep2') }}" method="POST">
                     @csrf
                     <div class="row">
-                        {{-- Website description --}}
-                        <div class="col-sm-12">
-                            <div class="mb-3">
-                                <label for="website_description" class="form-label">Website description <span
-                                        class="text-danger">*</span> <small class="text-body-tertiary">(It is not
-                                        allowed to add contact details)</small>
-                                </label>
-                                <textarea required  name="web_description" class="form-control" id="website_description">
-                                {{ old('web_description') }}
-                                </textarea>
-                                @error('web_description')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-
-                            </div>
-
+                          {{-- Website description --}}
+                        <div class="col-12 mb-3">
+                            <label for="website_description" class="form-label">Website description <span
+                                class="text-danger">*</span> <small class="text-body-tertiary">(It is not
+                                allowed to add contact details)</small>
+                        </label>
+                            <textarea required id="website_description" class="form-control" name="web_description"  cols="" rows="5"> {{ old('web_description') }}</textarea>
+                            @error('web_description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
+
+
                         {{-- country --}}
                         <div class="col-sm-6">
                             <div class="mb-3">
@@ -152,7 +145,7 @@ Add Web
                         <div class="col-sm-4">
                             <div class="mb-3">
                                 <label>How many images per post<span class="text-danger">*</span></label>
-                                <select name="images_per_post" class="Project_Language" id="Project_Language">
+                                <select name="images_per_post" class="images_per_post">
                                     <option value="" disabled selected>Select an options</option>
                                     @for ($i = 1; $i <= 5; $i++) <option value="{{ $i }}" {{ old('images_per_post')==$i
                                         ? 'selected' : '' }}>{{ $i }}</option>
@@ -198,6 +191,29 @@ Add Web
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <div>
+                                    <label for="Website_Language">Language(s) of your Website <span class="text-danger">*</span></label>
+                                </div>
+                                <select required class="js-example-basic-multiple" name="language" id="Website_Language">
+                                    <option value="" disabled selected>Select a Language</option>
+                                    <option value="catalan" {{ old('language') == 'catalan' ? 'selected' : '' }}>Catalán</option>
+                                    <option value="english" {{ old('language') == 'english' ? 'selected' : '' }}>English</option>
+                                    <option value="esukera" {{ old('language') == 'esukera' ? 'selected' : '' }}>Esukera</option>
+                                    <option value="french" {{ old('language') == 'french' ? 'selected' : '' }}>French</option>
+                                    <option value="gallego" {{ old('language') == 'gallego' ? 'selected' : '' }}>Gallego</option>
+                                    <option value="german" {{ old('language') == 'german' ? 'selected' : '' }}>German</option>
+                                    <option value="italiano" {{ old('language') == 'italiano' ? 'selected' : '' }}>Italiano</option>
+                                    <option value="portuguese" {{ old('language') == 'portuguese' ? 'selected' : '' }}>Portuguese</option>
+                                    <option value="spanish" {{ old('language') == 'spanish' ? 'selected' : '' }}>Spanish</option>
+                                </select>
+                                @error('language')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                         {{-- Select your website categories (maximum 3) * --}}
                         <div class="col-12 mt-3">
                             <label>Select your website categories (maximum 3)<span class="text-danger">*</span></label>
@@ -460,6 +476,10 @@ Add Web
                         </div>
 
                         <div class="col-12 mt-3 text-end">
+                            <a href="{{ route('publishers.website') }}" class="btn btn-dark">
+                                Cancel
+
+                            </a>
                             <button type="submit" class="btn btn-success waves-effect waves-light"> Next<i
                                     class="fa fa-arrow-right ms-1"></i>
                             </button>
@@ -525,7 +545,7 @@ Add Web
 @section('script')
 <script>
     $(document).ready(function() {
-        $('.Project_Language').select2();
+        $('.images_per_post').select2();
         $('.Select_Country').select2();
         $('.links_per_post').select2();
         $('.links_admitted').select2();

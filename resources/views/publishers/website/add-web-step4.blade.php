@@ -91,14 +91,14 @@ Add Web
 @endslot
 @endcomponent
 <div class="row">
-    <div class="col-md-8 col-12 py-2">
+    {{-- <div class="col-md-8 col-12 py-2">
 
          <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show" role="alert">
              <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - Step 3: Data has been saved successfully.
              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>
 
-     </div>
+     </div> --}}
 
     <div class="col-12">
         <!-- Primary Alert -->

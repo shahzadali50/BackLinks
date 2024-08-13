@@ -26,6 +26,8 @@
                    <h2 class="text-white mt-3">Advertiser</h2>
                    @elseif (Auth::user()->role == 'publisher')
                    <h2 class="text-white mt-3">Publisher</h2>
+                   @elseif (Auth::user()->role == 'admin')
+                   <h2 class="text-white mt-3">Admin</h2>
 
                    @endif
                @endauth
@@ -44,6 +46,7 @@
                 <li class="menu-title"><span>@lang('translation.menu')</span></li>
 
                 @auth
+                {{-- publisher🛑 --}}
                     @if (Auth::user()->role == 'publisher')
                         <!-- Publisher Menu Items -->
                         <li class="nav-item">
@@ -173,6 +176,7 @@
                                 <i class="ri-honour-line"></i> <span>Chat</span>
                             </a>
                         </li> --}}
+                        {{-- advertiser🛑 --}}
                     @elseif(Auth::user()->role == 'advertiser')
                         <!-- Advertiser Menu Items -->
                         {{-- Home --}}
@@ -206,10 +210,10 @@
                                 <i class="fa fa-life-ring" aria-hidden="true"></i><span>Contact Support</span>
                             </a>
                         </li> --}}
-
+                        {{-- Purchase --}}
                         <li class="nav-item">
                             <a class="nav-link menu-link "
-                                href="">
+                                href="{{ route('advertiser.purchase.webList') }}">
                                 <i class="fa fa-money" aria-hidden="true"></i><span>Purchase</span>
                             </a>
                         </li>
@@ -234,7 +238,51 @@
                                 <i class="fa fa-cog" aria-hidden="true"></i><span>Profile Setting</span>
                             </a>
                         </li>
+                        @elseif(Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+                                href="{{ route('admin.dashboard') }}">
+                                <i class="fa fa-home" aria-hidden="true"></i> <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('admin.user.list') ? 'active' : '' }}"
+                                href="{{ route('admin.user.list') }}">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i> <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#sidebarProjects" class="nav-link {{ request()->routeIs(['admin.websites.pending', 'admin.website.list', 'admin.websites.approve', 'admin.website.rejected']) ? 'active' : '' }} " data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProjects">
+                                <i class="fa fa-external-link" aria-hidden="true"></i> <span>Websites</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarProjects">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item {{ request()->routeIs('admin.website.list') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.website.list') }}" class="nav-link">List</a>
+                                    </li>
+                                    <li class="nav-item {{ request()->routeIs('admin.websites.pending') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.websites.pending') }}" class="nav-link">Pending</a>
+                                    </li>
+
+                                    <li class="nav-item {{ request()->routeIs('admin.websites.approve') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.websites.approve') }}" class="nav-link">Approve</a>
+                                    </li>
+                                    <li class="nav-item {{ request()->routeIs('admin.website.rejected') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.website.rejected') }} "class="nav-link">Rejected</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link {{ request()->routeIs('admin.ProfileSetting') ? 'active' : '' }}"
+                                href="{{ route('admin.ProfileSetting') }}">
+                                <i class="fa fa-cog" aria-hidden="true"></i> <span>Profile Setting</span>
+                            </a>
+                        </li>
+
                     @endif
+
                 @endauth
             </ul>
         </div>

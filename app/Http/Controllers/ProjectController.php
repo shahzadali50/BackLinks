@@ -114,40 +114,46 @@ class ProjectController extends Controller
         }
     }
 
-    public function webList(Request $request){
-        $webQuery = Website::query();
-        if ($request->query('audience')) {
-            $webQuery->where('audience', 'like', "%" . $request->query('audience') . "%");
-        }
-        if ($request->query('categories')) {
-            $webQuery->where('categories', 'like', "%" . $request->query('categories') . "%");
-        }
-        if ($request->query('link_type')) {
-            $webQuery->where('link_type', 'like', "%" . $request->query('link_type') . "%");
-        }
-        if ($request->query('min_price')) {
-            $webQuery->where('normal_price', '>=', $request->query('min_price'));
-        }
+    public function webList(Request $request)
+{
+    $webQuery = Website::query();
 
-        if ($request->query('max_price')) {
-            $webQuery->where('normal_price', '<=', $request->query('max_price'));
-        }
-        if ($request->query('sponsorship')) {
-            $webQuery->where('sponsorship', 'like', "%" . $request->query('sponsorship') . "%");
-        }
-        if ($request->query('search_query')) {
-            $searchQuery = strtolower($request->query('search_query'));
-            $webQuery->where(function($query) use ($searchQuery) {
-                $query->whereRaw('LOWER(web_url) LIKE ?', ["%{$searchQuery}%"])
-                      ->orWhereRaw('LOWER(web_description) LIKE ?', ["%{$searchQuery}%"])
-                      ->orWhereRaw('LOWER(audience) LIKE ?', ["%{$searchQuery}%"])
-                      ->orWhereRaw('LOWER(categories) LIKE ?', ["%{$searchQuery}%"]);
-            });
-        }
+    // Filter by website_status == "approve"
+    $webQuery->where('website_status', 'approve');
 
-
-        // $website=Website::all();
-        $website = $webQuery->get();
-        return view('advertiser.website-list',compact('website'));
+    if ($request->query('audience')) {
+        $webQuery->where('audience', 'like', "%" . $request->query('audience') . "%");
     }
+    if ($request->query('categories')) {
+        $webQuery->where('categories', 'like', "%" . $request->query('categories') . "%");
+    }
+    if ($request->query('link_type')) {
+        $webQuery->where('link_type', 'like', "%" . $request->query('link_type') . "%");
+    }
+    if ($request->query('min_price')) {
+        $webQuery->where('normal_price', '>=', $request->query('min_price'));
+    }
+    if ($request->query('max_price')) {
+        $webQuery->where('normal_price', '<=', $request->query('max_price'));
+    }
+    if ($request->query('sponsorship')) {
+        $webQuery->where('sponsorship', 'like', "%" . $request->query('sponsorship') . "%");
+    }
+    if ($request->query('language')) {
+        $webQuery->where('language', 'like', "%" . $request->query('language') . "%");
+    }
+    if ($request->query('search_query')) {
+        $searchQuery = strtolower($request->query('search_query'));
+        $webQuery->where(function($query) use ($searchQuery) {
+            $query->whereRaw('LOWER(web_url) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(web_description) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(audience) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(categories) LIKE ?', ["%{$searchQuery}%"]);
+        });
+    }
+
+    $website = $webQuery->get();
+    return view('advertiser.website-list', compact('website'));
+}
+
 }

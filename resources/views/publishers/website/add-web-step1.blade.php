@@ -94,13 +94,10 @@ Add Web
 
     <div class="col-md-10">
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header ">
                 <h3 class="mb-1 ">
                    1. Enter the URL</h3>
-                <a href="{{ route('publishers.website') }}" class="btn btn-dark">
-                    <i class="fa fa-arrow-left me-1" aria-hidden="true"></i></i>Cancel
 
-                </a>
             </div>
             <div class="card-body">
                 <form action="{{ route('publishers.form.postStep1') }}" method="POST">
@@ -120,6 +117,10 @@ Add Web
                         </div>
 
                         <div class="col-12">
+                            <a href="{{ route('publishers.website') }}" class="btn btn-dark">
+                                Cancel
+
+                            </a>
 
                             <button type="submit" class="btn btn-success waves-effect waves-light"> Next<i class="fa fa-arrow-right ms-1"></i>
                             </button>

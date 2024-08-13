@@ -20,5 +20,10 @@ class Website extends Model
     {
         return $this->favourites()->where('user_id', Auth::id())->exists();
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

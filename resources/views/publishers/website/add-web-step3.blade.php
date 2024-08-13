@@ -91,14 +91,14 @@ Add Web
 @endslot
 @endcomponent
 <div class="row">
-    <div class="col-md-8 col-12 py-2">
+    {{-- <div class="col-md-8 col-12 py-2">
         @if(session('success'))
          <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show" role="alert">
              <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - {{ session('success') }}
              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>
          @endif
-     </div>
+     </div> --}}
     <div class="col-12">
         <!-- Primary Alert -->
         <div class="alert alert-dark border-dark" role="alert">

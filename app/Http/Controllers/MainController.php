@@ -35,20 +35,25 @@ class MainController extends Controller
         if ($user) {
             if ($user->role === 'publisher') {
                 return redirect()->route('publishers.dashboard');
-            } elseif ($user->role === 'advertiser') {
+            }
+             elseif ($user->role === 'advertiser') {
                 return redirect()->route('advertiser.dashboard'); // or any other route for advertisers
+            }
+             elseif ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard'); // or any other route for advertisers
             }
         }
 
         return view('index');
     }
 
-
-
-
     public function dashboard()
     {
         return view('publishers.dashboard');
+    }
+    public function adminDashboard()
+    {
+        return view('admin.dashboard');
     }
     public function ContactSupport()
     {
@@ -56,7 +61,7 @@ class MainController extends Controller
     }
     public function ProfileSetting()
     {
-        return view('publishers.profile-setting');
+        return view('profile_setting.index');
     }
     public function website()
     {
@@ -254,3 +259,4 @@ class MainController extends Controller
 
     }
 }
+

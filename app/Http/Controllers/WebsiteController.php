@@ -65,6 +65,7 @@ class WebsiteController extends Controller
             'images_per_post' => 'required|integer',
             'post_link' => 'required|integer',
             'link_type' => 'required|string',
+            'language' => 'required|string',
             'categories' => 'required|array|max:3',
             'delicated_topics' => 'required|array',
             'sponsorship' => 'required|string',
@@ -128,6 +129,7 @@ class WebsiteController extends Controller
             'web_url' => $allData['web_url'] ?? null,
             'web_description' => $allData['web_description'] ?? null,
             'audience' => $allData['audience'] ?? null,
+            'language' => $allData['language'] ?? null,
             'images_per_post' => $allData['images_per_post'] ?? null,
             'post_link' => $allData['post_link'] ?? null,
             'link_type' => $allData['link_type'] ?? null,
@@ -165,6 +167,15 @@ class WebsiteController extends Controller
             Flashy::warning('�� Something went wrong while deleting the website.', '#');
             return redirect()->route('publishers.website')->with('error', 'Something went wrong while deleting the website.');
         }
+
+    }
+
+    public function website_detail($encodedId) {
+
+        $websiteId = base64_decode($encodedId);
+        $website = Website::findOrFail($websiteId);
+        return $website;
+        return view('publishers.website.website-detail',compact('website'));
 
     }
 
