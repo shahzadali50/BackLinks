@@ -45,6 +45,36 @@ Users
         @endif
 
     </div>
+    <div class="col-12">
+       <div class="card p-3">
+        <form action="" id="filterForm">
+            <div class="row">
+
+                <div class="col-7">
+                    <a href="{{ route('admin.user.list') }}" class="btn btn-primary"> <i class="fa fa-search me-1"
+                        aria-hidden="true"></i>All Results</a>
+
+                </div>
+                <div class="col-5">
+                    <label> Filter by user role</label>
+                    <br>
+                    <select name="role" class="js-example-basic-single links_admitted" onchange="submitForm()">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="publisher">Publisher
+                        </option>
+                        <option value="advertiser">Advertiser
+                        </option>
+
+
+                    </select>
+
+                </div>
+            </div>
+
+
+        </form>
+       </div>
+    </div>
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header ">
@@ -74,9 +104,9 @@ Users
                             <td>{{ $user->email }}</td>
                             <td>
                                 @if($user->role == 'advertiser')
-                                    <span class="badge bg-primary">{{ $user->role }}</span>
+                                <span style="font-size: 12px;" class="badge bg-primary">{{ $user->role }}</span>
                                 @elseif($user->role == 'publisher')
-                                    <span class="badge bg-secondary">{{ $user->role }}</span>
+                                <span style="font-size: 12px;" class="badge bg-success">{{ $user->role }}</span>
                                 @endif
                             </td>
                             <td>{{ $user->created_at->format('F j, Y') }}</td>
@@ -108,7 +138,7 @@ Users
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                        @endforeach
 
 
                     </tbody>
@@ -153,6 +183,19 @@ Users
 <script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
 
 <script>
+    $(document).ready(function() {
+                $('.Project_Language').select2();
+                $('.Select_Country').select2();
+                $('.links_per_post').select2();
+                $('.links_admitted').select2();
+                $('.delicated_topics').select2();
+                $('.js-example-basic-multiple').select2();
+            });
+function submitForm(){
+    document.getElementById('filterForm').submit();
+
+}
+
     $(document).ready(function() {
         var userId;
 

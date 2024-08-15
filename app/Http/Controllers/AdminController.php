@@ -9,11 +9,18 @@ use Psy\Readline\Hoa\Console;
 
 class AdminController extends Controller
 {
-    public function user_list()
+    public function user_list(Request $request)
     {
-        $users = User::where('role', 'advertiser')
-            ->orWhere('role', 'publisher')
-            ->get();
+        $userQuery = User::query();
+        $userQuery = User::where(function ($query) {
+            $query->where('role', 'advertiser')
+                  ->orWhere('role', 'publisher');
+        });
+            if($request->query('role')){
+                $userQuery->where('role', 'like', "%" . $request->query('role') . "%");
+
+            }
+            $users = $userQuery->get();
         return view('admin.user.list', compact('users'));
     }
     public function user_detail($encodedId)
@@ -35,10 +42,46 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => 'Something went wrong while deleting the user.']);
         }
     }
-    public function website_list()
+    public function website_list( Request $request)
     {
 
-        $websites = Website::with('user')->get();
+        $webQuery = Website::query();
+
+        // Filter by website_status == "approve"
+        // $webQuery->where('website_status', 'approve');
+
+        if ($request->query('audience')) {
+            $webQuery->where('audience', 'like', "%" . $request->query('audience') . "%");
+        }
+        if ($request->query('categories')) {
+            $webQuery->where('categories', 'like', "%" . $request->query('categories') . "%");
+        }
+        if ($request->query('link_type')) {
+            $webQuery->where('link_type', 'like', "%" . $request->query('link_type') . "%");
+        }
+        if ($request->query('min_price')) {
+            $webQuery->where('normal_price', '>=', $request->query('min_price'));
+        }
+        if ($request->query('max_price')) {
+            $webQuery->where('normal_price', '<=', $request->query('max_price'));
+        }
+        if ($request->query('sponsorship')) {
+            $webQuery->where('sponsorship', 'like', "%" . $request->query('sponsorship') . "%");
+        }
+        if ($request->query('language')) {
+            $webQuery->where('language', 'like', "%" . $request->query('language') . "%");
+        }
+        if ($request->query('search_query')) {
+            $searchQuery = strtolower($request->query('search_query'));
+            $webQuery->where(function($query) use ($searchQuery) {
+                $query->whereRaw('LOWER(web_url) LIKE ?', ["%{$searchQuery}%"])
+                      ->orWhereRaw('LOWER(web_description) LIKE ?', ["%{$searchQuery}%"])
+                      ->orWhereRaw('LOWER(audience) LIKE ?', ["%{$searchQuery}%"])
+                      ->orWhereRaw('LOWER(categories) LIKE ?', ["%{$searchQuery}%"]);
+            });
+        }
+
+        $websites = $webQuery->get();
         return view('admin.websites.list', compact('websites'));
     }
     public function website_detail($encodedId)
@@ -81,8 +124,4 @@ class AdminController extends Controller
 
         return response()->json(['msg' => 'Failed to update status.'], 400);
     }
-
-
-
-
 }

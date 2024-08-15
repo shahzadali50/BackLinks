@@ -307,7 +307,7 @@ Websites
     @section('script')
     <script>
         $(document).ready(function() {
-                $('.Project_Language').select2({});
+                $('.Project_Language').select2();
                 $('.Select_Country').select2();
                 $('.links_per_post').select2();
                 $('.links_admitted').select2();

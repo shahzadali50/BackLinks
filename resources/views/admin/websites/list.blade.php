@@ -22,40 +22,176 @@
     @endcomponent
     <div class="row">
         <div class="col-12">
-            <a href="{{ route('admin.website.list') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.website.list') ? 'active' : '' }}"><i class="fa fa-arrows-alt me-1" aria-hidden="true"></i>All Results</a>
-            <a href="{{ route('admin.websites.pending') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.websites.pending') ? 'active' : '' }}"><i class="fa fa-ravelry me-1" aria-hidden="true"></i>Pending</a>
-            <a href="{{ route('admin.website.rejected') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.website.rejected') ? 'active' : '' }}"><i class="fa fa-ban me-1" aria-hidden="true"></i>Rejected</a>
-            <a href="{{ route('admin.websites.approve') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.websites.approve') ? 'active' : '' }}"><i class="fa fa-check me-1" aria-hidden="true"></i>Approve</a>
+            <a href="{{ route('admin.website.list') }}" class="btn btn-outline-primary {{ request()->routeIs('admin.website.list') ? 'active' : '' }}"><i class="fa fa-search me-1" aria-hidden="true"></i>All Results</a>
+            <a href="{{ route('admin.websites.pending') }}" class="btn btn-outline-primary {{ request()->routeIs('admin.websites.pending') ? 'active' : '' }}"><i class="fa fa-ravelry me-1" aria-hidden="true"></i>Pending</a>
+            <a href="{{ route('admin.website.rejected') }}" class="btn btn-outline-primary {{ request()->routeIs('admin.website.rejected') ? 'active' : '' }}"><i class="fa fa-ban me-1" aria-hidden="true"></i>Rejected</a>
+            <a href="{{ route('admin.websites.approve') }}" class="btn btn-outline-primary {{ request()->routeIs('admin.websites.approve') ? 'active' : '' }}"><i class="fa fa-check me-1" aria-hidden="true"></i>Approve</a>
         </div>
-        <div class="col-8 py-3">
+        <div class="card px-4 mt-4">
+            <form action="" id="filerWebForm">
+                <div class="row py-3">
+
+                    <div class="col-12 py-3">
+                        <div class="input-group ">
+
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa fa-search"
+                                    aria-hidden="true"></i></span>
+                            <input name="search_query" type="text" class="form-control"
+                                placeholder="Search by URL, description, tag or region" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default" onchange="submitForm()">
+                        </div>
+                    </div>
+                    {{-- Search by Country --}}
+                    <div class="col-sm-4">
+                        <div class="mb-3">
+                            <label for="Select_Country">Search by Country
+                            </label>
+                            <select name="audience" class="Select_Country" onchange="submitForm()">
+                                <option value="" disabled selected>Select an option</option>
+                                @foreach (config('countries.countries') as $country)
+                                <option value="{{ $country }}" {{ old('audience')==$country ? 'selected' : '' }}>
+                                    {{ $country }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                    </div>
+                    {{-- Search by categories --}}
+                    <div class="col-sm-4">
+                        <div class="mb-3">
+                            <label for="Select_Country">Search by categories
+                            </label>
+                            <select name="categories" class="Select_Country" onchange="submitForm()">
+                                <option value="" disabled selected>Select an option</option>
+                                @foreach (config('categories.categories') as $category)
+                                <option value="{{ $category['label'] }}">
+                                    {{ $category['label'] }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                    </div>
+                    {{-- Search by type of links admitted --}}
+                    <div class="col-sm-4">
+                        <div class="mb-3">
+                            <label> Search by type of links admitted <span class="text-danger">*</span></label>
+                            <select name="link_type" class="js-example-basic-single links_admitted" id="links_admitted"
+                                onchange="submitForm()">
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="Follow">Follow
+                                </option>
+                                <option value="No Follow">No
+                                    Follow</option>
+                                <option value="Sponsored">
+                                    Sponsored</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="mb-3">
+                            <div>
+                                <label for="Website_Language"> Search by Language <span class="text-danger">*</span></label>
+                            </div>
+                            <select required class="js-example-basic-multiple" name="language" id="Website_Language"
+                                onchange="submitForm()">
+                                <option value="" disabled selected>Select a Language</option>
+                                <option value="catalan">Catalán</option>
+                                <option value="english">English</option>
+                                <option value="esukera">Esukera</option>
+                                <option value="french">French</option>
+                                <option value="gallego">Gallego</option>
+                                <option value="german">German</option>
+                                <option value="italiano">Italiano</option>
+                                <option value="portuguese">Portuguese</option>
+                                <option value="spanish">Spanish</option>
+                            </select>
+                            @error('language')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- Min Price --}}
+                    <div class="col-sm-4">
+                        <label>Enter Min Price </label>
+                        <div class="input-group">
+
+                            <span class="input-group-text" id="inputGroup-sizing-default">Min.price</span>
+                            <input name="min_price" type="number" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default" onchange="submitForm()">
+                        </div>
+                    </div>
+                    {{-- Max Price --}}
+                    <div class="col-sm-4">
+                        <label>Enter Max Price </label>
+                        <div class="input-group">
+
+                            <span class="input-group-text" id="inputGroup-sizing-default">Max.price</span>
+                            <input name="max_price" type="number" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default" onchange="submitForm()">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="mb-3">
+                            <label>Search by Sponsorship notification </label>
+                            <select name="sponsorship" class="delicated_topics" onchange="submitForm()">
+                                <option value="">Select an options</option>
+
+                                <option value="Always">Always
+                                </option>
+                                <option value="Only if its is noticed">Only if its is
+                                    noticed</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
             <!-- Secondary Alert -->
 
             @if (session('success'))
-                <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show"
+                <div class="col-12">
+                    <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show"
                     role="alert">
                     <i class="ri-check-double-line label-icon"></i>
                     <strong>Success</strong> - {{ session('success') }}
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
+                </div>
             @elseif(session('error'))
                 <!-- Danger Alert -->
+               <div class="col-12">
                 <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
                     <strong>Error</strong> - {{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss=" alert" aria-label="Close"></button>
                 </div>
+               </div>
             @elseif(session('delete'))
+              <div class="col-12">
                 <div class="alert alert-danger alert-dismissible bg-danger text-white alert-label-icon fade show"
-                    role="alert">
-                    <i class="ri-check-double-line label-icon"></i><strong> {{ session('delete') }}</strong>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
-                        aria-label="Close"></button>
-                </div>
+                role="alert">
+                <i class="ri-check-double-line label-icon"></i><strong> {{ session('delete') }}</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
+              </div>
             @endif
 
+        @if ($websites->isEmpty())
+        <div class="col-12">
+            <div class="alert alert-info mt-4">
+               Sorry! 🛑 No results found.
+            </div>
+
         </div>
-        <div class="col-lg-12">
+        @endif
+        <div class="col-12">
             <div class="card">
                 <div class="card-header ">
                     <h3 class="">Websites List</h3>
@@ -177,6 +313,18 @@
     <script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
 
     <script>
+           $(document).ready(function() {
+                $('.Project_Language').select2();
+                $('.Select_Country').select2();
+                $('.links_per_post').select2();
+                $('.links_admitted').select2();
+                $('.delicated_topics').select2();
+                $('.js-example-basic-multiple').select2();
+            });
+
+            function submitForm() {
+                document.getElementById('filerWebForm').submit();
+            }
         function changeWebsiteStatus(id, status) {
             // alert('Change website status'+status+ 'id'+id);
             (async () => {

@@ -264,9 +264,7 @@
                                 <i class="fa fa-cog" aria-hidden="true"></i> <span>Profile Setting</span>
                             </a>
                         </li>
-
                     @endif
-
                 @endauth
             </ul>
         </div>
