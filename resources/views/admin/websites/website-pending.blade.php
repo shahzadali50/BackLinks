@@ -21,6 +21,12 @@
         @endslot
     @endcomponent
     <div class="row">
+        <div class="col-12">
+            <a href="{{ route('admin.website.list') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.website.list') ? 'active' : '' }}"><i class="fa fa-arrows-alt me-1" aria-hidden="true"></i>All Results</a>
+            <a href="{{ route('admin.websites.pending') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.websites.pending') ? 'active' : '' }}"><i class="fa fa-ravelry me-1" aria-hidden="true"></i>Pending</a>
+            <a href="{{ route('admin.website.rejected') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.website.rejected') ? 'active' : '' }}"><i class="fa fa-ban me-1" aria-hidden="true"></i>Rejected</a>
+            <a href="{{ route('admin.websites.approve') }}" class="btn btn-outline-dark {{ request()->routeIs('admin.websites.approve') ? 'active' : '' }}"><i class="fa fa-check me-1" aria-hidden="true"></i>Approve</a>
+        </div>
         <div class="col-12 py-3">
             @if($websites->isEmpty())
             <div class="alert alert-primary" role="alert">
@@ -34,7 +40,7 @@
             <div class="card">
                 <div class="card-header ">
                     <h3 class="">Pending Websites List</h3>
-                    
+
 
                 </div>
                 <div class="card-body">

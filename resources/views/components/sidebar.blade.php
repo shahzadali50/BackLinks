@@ -252,27 +252,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#sidebarProjects" class="nav-link {{ request()->routeIs(['admin.websites.pending', 'admin.website.list', 'admin.websites.approve', 'admin.website.rejected']) ? 'active' : '' }} " data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProjects">
-                                <i class="fa fa-external-link" aria-hidden="true"></i> <span>Websites</span>
+                            <a class="nav-link menu-link {{ request()->routeIs('admin.website.list') ? 'active' : '' }}"
+                                href="{{ route('admin.website.list') }}">
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                <span>Websites</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarProjects">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item {{ request()->routeIs('admin.website.list') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.website.list') }}" class="nav-link">List</a>
-                                    </li>
-                                    <li class="nav-item {{ request()->routeIs('admin.websites.pending') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.websites.pending') }}" class="nav-link">Pending</a>
-                                    </li>
-
-                                    <li class="nav-item {{ request()->routeIs('admin.websites.approve') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.websites.approve') }}" class="nav-link">Approve</a>
-                                    </li>
-                                    <li class="nav-item {{ request()->routeIs('admin.website.rejected') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.website.rejected') }} "class="nav-link">Rejected</a>
-                                    </li>
-
-                                </ul>
-                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link {{ request()->routeIs('admin.ProfileSetting') ? 'active' : '' }}"
