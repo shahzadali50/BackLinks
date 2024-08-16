@@ -30,9 +30,6 @@ Website Detail
 
 
 <div class="row mt-4">
-    <div class="col-12 py-3">
-        <a class="btn btn-dark" href="{{ route('admin.website.list') }}">back</a>
-    </div>
 
     @php
     // Decode categories and dedicated topics JSON

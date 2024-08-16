@@ -113,7 +113,23 @@
                                     </td>
 
                                     <td>
-                                        <div class="dropdown d-inline-block">
+                                        <a href="javascript:void(0);"
+                                            onclick="changeWebsiteStatus(`{{ $site->id }}`,`{{ $site->website_status }}`)"
+                                            class="btn btn-outline-success btn-icon waves-effect waves-light me-2"
+                                            style="padding: 0px; width:21px; height:21px;" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Change Status">
+                                            <i class="ri-edit-2-line" aria-hidden="true"></i>
+                                        </a>
+
+                                        <a href="{{ route('admin.website.detail', ['encodedId' => base64_encode($site->id)]) }}"
+                                            class="btn btn-outline-primary btn-icon waves-effect waves-light"
+                                            style="padding: 0px; width:21px; height:21px;" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="View Details">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        {{-- if need dropdown then use this below code 👇 --}}
+
+                                        {{-- <div class="dropdown d-inline-block">
                                             <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fa fa-ellipsis-v"></i>
@@ -128,10 +144,12 @@
 
                                                 </li>
                                                 <li class="dropdown-item">
-                                                   <a href="{{ route('admin.website.detail',['encodedId'=>base64_encode($site->id )]) }}"> <i class="fa fa-eye me-2"></i> More Detail</a>
+                                                    <a
+                                                        href="{{ route('admin.website.detail',['encodedId'=>base64_encode($site->id )]) }}">
+                                                        <i class="fa fa-eye me-2"></i> More Detail</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </td>
 
                                 </tr>

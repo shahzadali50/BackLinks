@@ -110,8 +110,29 @@ Users
                                 @endif
                             </td>
                             <td>{{ $user->created_at->format('F j, Y') }}</td>
-                            <td>
-                                <div class="dropdown d-inline-block">
+                            <td class="d-flex">
+                                <a href="{{ route('admin.user.detail', ['encodedId' => base64_encode($user->id)]) }}"
+                                    class="btn btn-outline-primary btn-icon waves-effect waves-light me-2"
+                                    style="padding: 0px; width:21px; height:21px;"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View user">
+                                     <i class="fa fa-eye" aria-hidden="true"></i>
+                                 </a>
+
+                                 <form method="POST" data-id="{{ $user->id }}">
+                                     @csrf
+                                     <button type="button"
+                                             class="btn btn-outline-danger btn-icon waves-effect waves-light deleteUserBtn"
+                                             style="padding: 0px; width:21px; height:21px;"
+                                             data-bs-toggle="modal" data-bs-target="#delete"
+                                             data-id="{{ $user->id }}"
+                                             data-bs-toggle="tooltip"
+                                             data-bs-placement="top" title="Delete user">
+                                         <i class="ri-delete-bin-5-line"></i>
+                                     </button>
+                                 </form>
+
+                                  {{-- if add dropdown then use this code 🤍 --}}
+                                {{-- <div class="dropdown d-inline-block">
                                     <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ri-more-fill align-middle"></i>
@@ -135,7 +156,7 @@ Users
                                             </form>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </td>
                         </tr>
                         @endforeach
