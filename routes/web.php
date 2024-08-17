@@ -23,7 +23,7 @@ Route::middleware(['auth'])->as('user.')->prefix('user')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-// publishers Routes ðŸ›‘
+// publishers Routes
 Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers')->group(function () {
 
     Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
@@ -53,7 +53,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
-// advertiser Routes ðŸ›‘
+// advertiser Routes
 Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser')->group(function () {
     Route::get('/home', [MainController::class, 'advertiserDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
@@ -86,7 +86,7 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::get('favourite/websites', [MainController::class, 'favouriteWeb'])->name('favourireWeb');
 
 });
-// admin Routes ðŸ›‘
+// admin Routes
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
