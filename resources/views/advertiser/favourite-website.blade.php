@@ -52,7 +52,7 @@ Favourite Websites
     ? implode(', ', $delicatedTopics)
     : $delicatedTopics;
     @endphp
-    <div class="col-lg-6">
+    <div class="col-lg-6" id="favorite-{{ $favourite->website->id }}">
         <div class="card border card-border-info weblistCard ">
             <div class="card-header d-flex justify-content-between ">
                 <a href="{{ $favourite->website->web_url }}" class="card-title mb-0">{{ $favourite->website->web_url
@@ -138,9 +138,9 @@ Favourite Websites
                     <hr>
                     <div class="col-12 text-end">
                         <a style="font-size:16px" href="javascript:void(0);"
-                        onclick="purchaseWeb({{ $favourite->website->id }}, '{{ $favourite->website->normal_price }}')">
-                        <span class="">$</span>{{ $favourite->website->normal_price }}
-                    </a>
+                            onclick="purchaseWeb({{ $favourite->website->id }}, '{{ $favourite->website->normal_price }}')">
+                            <span class="">$</span>{{ $favourite->website->normal_price }}
+                        </a>
                         {{-- <span class="btn btn-warning">{{ $favourite->website->normal_price }}</span> --}}
                     </div>
                 </div>
@@ -196,7 +196,12 @@ Favourite Websites
                     var icon = $('#heart-' + fileId);
                     if (response.message === 'Website added to favourite') {
                         icon.removeClass('fa-heart-o text-dark ').addClass('fa-heart text-danger');
-                    } else if (response.message === 'Website removed from favourite') {
+                    }
+                     else if (response.message === 'Website removed from favourite')
+                      {
+                        $('#favorite-' + id).fadeOut(300, function() {
+                        $(this).remove();
+                    });
                         icon.removeClass('fa-heart text-danger').addClass('fa-heart-o text-dark');
                     }
                 }

@@ -320,9 +320,9 @@ Websites
             }
             // purchaseWeb
             function purchaseWeb(id, normalPrice) {
-                // var webId = id;
-                // var price = normalPrice;
-                // alert('webId = ' + webId + ' price =' + price);
+                var webId = id;
+                var price = normalPrice;
+                alert('webId = ' + webId + ' price =' + price);
                 Swal.fire({
                     title: "Are you sure?",
                     text: "Are you sure you want  to purchase this website.",
@@ -344,7 +344,10 @@ Websites
                                 '_token': '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                if (response.success) { // Checks if response.success is true
+                                if (response.success) {
+                                     // Checks if response.success is true
+                                     $('#creditAmount').text('$' + response.remainingAmount);
+                                     console.log('Remaining Credit Amount: $' + response.remainingAmount);
                                     Swal.fire({
                                         title: "Thank You 👍",
                                         text: response.message,

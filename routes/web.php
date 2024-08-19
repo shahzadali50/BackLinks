@@ -50,6 +50,8 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
+
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
@@ -73,6 +75,7 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/purchase/web', [PurchaseWebController::class, 'purchase_web'])->name('purchase.web');
     Route::get('purchase/website/list', [PurchaseWebController::class, 'puchaseWebList'])->name('purchase.webList');
 
+    Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
@@ -90,6 +93,8 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
+
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::get('/users/list', [AdminController::class, 'user_list'])->name('user.list');

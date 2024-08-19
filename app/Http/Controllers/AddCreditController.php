@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AddCredit;
 use Illuminate\Http\Request;
+use MercurySeries\Flashy\Flashy;
 
 class AddCreditController extends Controller
 {
@@ -12,7 +13,11 @@ class AddCreditController extends Controller
         $request->validate([
             'amount' => 'required|integer',
             'coupon' => 'nullable|integer',
-            'payment_method' => 'nullable',
+            'payment_method' => [
+                'required',
+                'string',
+                'in:Bank_Transfer,Stripe,PayPal' 
+            ],
         ]);
 
         // Get the authenticated user's ID
@@ -23,9 +28,9 @@ class AddCreditController extends Controller
             'user_id' => $userId,
             'amount' => $request->amount,
             'coupon' => $request->coupon,
+            'payment_method' => $request->payment_method,
         ]);
-
-        // Redirect to the bill detail page with a success message
+        Flashy::mutedDark(' ✅ Your amount has been added successfully. ', '#');
         return redirect()->route('advertiser.bill.detail')->with('success', 'Your amount has been added successfully.');
     }
 

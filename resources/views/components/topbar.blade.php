@@ -39,7 +39,7 @@
                 <div>
                    <a href="{{ route('advertiser.wallet') }}">
                     @if(Auth::user()->role=='advertiser')
-                    <h4 class="mb-0 me-3">${{ $totalAmount }}</h4>
+                    <h4 class="mb-0 me-3" id="creditAmount">${{ $totalAmount }}</h4>
                     @endif
                    </a>
                 </div>
@@ -835,9 +835,8 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user"
-                                src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('build/images/users/avatar-1.jpg') }}@endif"
-                                alt="Header Avatar">
+                            <img class="rounded-circle header-profile-user" src="{{ auth()->user()->profile_img ? url('storage/profile_images/' . auth()->user()->profile_img) : url('build/images/profile/default-profile.png') }}" alt="Profile Image">
+
                             <span class="text-start ms-xl-2">
                                 <span
                                     class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>

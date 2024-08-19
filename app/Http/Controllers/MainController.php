@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class MainController extends Controller
@@ -35,11 +36,9 @@ class MainController extends Controller
         if ($user) {
             if ($user->role === 'publisher') {
                 return redirect()->route('publishers.dashboard');
-            }
-             elseif ($user->role === 'advertiser') {
+            } elseif ($user->role === 'advertiser') {
                 return redirect()->route('advertiser.dashboard'); // or any other route for advertisers
-            }
-             elseif ($user->role === 'admin') {
+            } elseif ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard'); // or any other route for advertisers
             }
         }
@@ -108,7 +107,11 @@ class MainController extends Controller
 
     public function wallet()
     {
-        return view('advertiser.wallet');
+        $userId=Auth::user()->id;
+        $totalAmount = AddCredit::where('user_id', $userId)->sum('amount');
+        $creditDetail = AddCredit::where('user_id', $userId)  ->orderBy('created_at', 'desc')->get();
+
+        return view('advertiser.wallet', compact('totalAmount','creditDetail'));
     }
     // public function list(){
     //     return view('advertiser.project.list');
@@ -137,7 +140,8 @@ class MainController extends Controller
         // Check if the old password matches the current user's password
         if (!Hash::check($request->password, Auth::user()->password)) {
             Flashy::error(' ❌The provided password does not match your current password.', '#');
-            return back()->withErrors(['password' => 'The provided password does not match your current password.']);        }
+            return back()->withErrors(['password' => 'The provided password does not match your current password.']);
+        }
 
         // Update the user's password
         Auth::user()->update([
@@ -147,6 +151,32 @@ class MainController extends Controller
 
 
         return back()->with('success', 'Password updated successfully.');
+    }
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'profile_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as needed
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('profile_img')) {
+            // Delete the old profile image if it exists
+            if ($user->profile_img) {
+                Storage::delete('public/profile_images/' . $user->profile_img);
+            }
+
+            // Store the new profile image
+            $imageName = time() . '.' . $request->profile_img->extension();
+            $request->profile_img->storeAs('public/profile_images', $imageName);
+
+            // Update the user's profile_img field
+            $user->profile_img = $imageName;
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     public function updateEmail(Request $request)
@@ -187,39 +217,39 @@ class MainController extends Controller
     }
 
     public function updateNamePhoneCountry(Request $request)
-{
+    {
 
-    // return $request;
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'phone_number' => 'nullable|string|max:15',
-        'country' => 'nullable|string|max:255',
-    ]);
+        // return $request;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'nullable|string|max:15',
+            'country' => 'nullable|string|max:255',
+        ]);
 
-    $user = Auth::user();
-    // Update or create the user details
-    $user->updateOrCreate(
-        ['id' => $user->id], // Attributes to find the existing record
-        [
-            'name' => $request->name,
-            'phone_number' => $request->phone_number ?? $user->phone_number,
-            'country' => $request->country ?? $user->country,
-        ]
-    );
+        $user = Auth::user();
+        // Update or create the user details
+        $user->updateOrCreate(
+            ['id' => $user->id], // Attributes to find the existing record
+            [
+                'name' => $request->name,
+                'phone_number' => $request->phone_number ?? $user->phone_number,
+                'country' => $request->country ?? $user->country,
+            ]
+        );
 
-    Flashy::mutedDark('  ✅User Detail Added successfully.', '#');
+        Flashy::mutedDark('  ✅User Detail Added successfully.', '#');
 
-    return redirect()->back()->with('success', 'User Detail Added successfully.');
-}
-
-
-    public function billDetail(){
-        return view('advertiser.bill-detail.index');
-
+        return redirect()->back()->with('success', 'User Detail Added successfully.');
     }
-    public function KYC(){
-        return view('kyc.index');
 
+
+    public function billDetail()
+    {
+        return view('advertiser.bill-detail.index');
+    }
+    public function KYC()
+    {
+        return view('kyc.index');
     }
 
     public function addFavouriteWeb(Request $request)
@@ -240,7 +270,8 @@ class MainController extends Controller
             // If it exists, delete it
             $existingFavourite->delete();
             return response()->json(['success' => true, 'message' => 'Website removed from favourite']);
-        } else {
+        }
+        else {
             // If it does not exist, create it
             FavouriteWeb::create([
                 'user_id' => $userId,
@@ -249,14 +280,13 @@ class MainController extends Controller
             return response()->json(['success' => true, 'message' => 'Website added to favourite']);
         }
     }
-    public function favouriteWeb(){
+    public function favouriteWeb()
+    {
         $userId = Auth::id();
         $favouriteWebsites = FavouriteWeb::with('website')
             ->where('user_id', $userId)
             ->get();
 
         return view('advertiser.favourite-website', compact('favouriteWebsites'));
-
     }
 }
-
