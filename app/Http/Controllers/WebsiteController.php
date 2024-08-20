@@ -53,6 +53,7 @@ class WebsiteController extends Controller
             return redirect()->route('publishers.add.websiteStep1')
                 ->with('error', 'Please complete all previous steps.');
         }
+        Flashy::mutedDark('✅ Step 1: Data has been saved successfully.', '#');
         return view('publishers.website.add-web-step2');
     }
 
@@ -63,7 +64,7 @@ class WebsiteController extends Controller
             return redirect()->route('publishers.add.websiteStep1')
                 ->with('error', 'Please complete all previous steps.');
         }
-        Flashy::mutedDark('✅ Step 3: Data has been saved successfully.', '#');
+        Flashy::mutedDark('✅ Step 2: Data has been saved successfully.', '#');
         return view('publishers.website.add-web-step3');
     }
 
@@ -74,6 +75,7 @@ class WebsiteController extends Controller
             return redirect()->route('publishers.add.websiteStep1')
                 ->with('error', 'Please complete all previous steps.');
         }
+        Flashy::mutedDark('✅ Step 3: Data has been saved successfully.', '#');
         return view('publishers.website.add-web-step4');
     }
 
@@ -138,7 +140,7 @@ class WebsiteController extends Controller
                 ]
             ));
 
-            Flashy::mutedDark('✅ Step 3: Data has been saved successfully.', '#');
+            Flashy::mutedDark('✅ Step 2: Data has been saved successfully.', '#');
             return redirect()->route('publishers.add.websiteStep3')->with('success', 'Step 2: Data has been saved successfully.');
         }
         catch (\Exception $e) {
@@ -205,22 +207,40 @@ class WebsiteController extends Controller
         }
     }
 
+    // website delete 🌟
+
     public function webDelete($id)
     {
         try {
+            // Find the website by ID
             $website = Website::find($id);
+
+            // Check if the website exists
             if ($website) {
+                // Attempt to delete the website
                 $website->delete();
-                Flashy::mutedDark('✅ Website information has been successfully deleted.', '#');
-                return redirect()->route('publishers.website')->with('delete', 'Website information has been successfully deleted.');
+
+                // Return a success response
+                return response()->json(['success' => true, 'message' => 'Website has been successfully deleted.']);
             } else {
-                Flashy::warning('🔄 Something went wrong while deleting the website.', '#');
-                return redirect()->route('publishers.website')->with('error', 'Something went wrong while deleting the website.');
+                // Return a failure response if the website doesn't exist
+                return response()->json(['success' => false, 'message' => 'Website not found.']);
             }
         } catch (\Exception $e) {
-            Log::error('Error in webDelete', ['exception' => $e->getMessage()]);
-            return redirect()->route('publishers.website')
-                ->with('error', 'An error occurred while deleting the website.');
+            // Log the exception details
+            Log::error('Error deleting website: ', ['id' => $id, 'error' => $e->getMessage()]);
+
+            // Return a failure response with a generic error message
+            return response()->json(['success' => false, 'message' => 'Something went wrong while deleting the website.']);
         }
+    }
+    // view website 🌟
+    public function website_detail($encodedId)
+    {
+        $websiteId = base64_decode($encodedId);
+
+        $website = Website::find($websiteId);
+        // return $website;
+        return view('publishers.website.website-detail', compact('website'));
     }
 }

@@ -44,7 +44,7 @@ Website Detail
     @endphp
     <div class="col-12">
         <div class="card border btn-soft-success weblistCard ">
-            <div class="card-header d-flex justify-content-between bg-success-subtle ">
+            <div class="card-header d-flex justify-content-between web-card-header">
                 <a style="font-weight: 700" href="{{ $website->web_url }}" class="card-title mb-0 text-dark">{{
                     $website->web_url }}</a>
                 <div>
@@ -70,7 +70,8 @@ Website Detail
                             <div>
                                 <p class="mb-0"><i style="font-size: 17px;" class="fa bx bxs-spa text-warning me-1"
                                         aria-hidden="true "></i>
-                                    <span class="badge bg-primary-subtle text-primary badge-border">{{ $website->link_type
+                                    <span class="badge bg-primary-subtle text-primary badge-border">{{
+                                        $website->link_type
                                         }}</span>
                                 </p>
                                 <p>indicated: Yes</p>

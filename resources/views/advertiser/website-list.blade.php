@@ -3,20 +3,7 @@
 Webs | {{ auth()->user()->role }}
 @endsection
 @section('css')
-<style>
-    .weblistCard:hover {
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    }
 
-    .weblistCard p {
-        font-size: 14px;
-    }
-
-    .weblistCard i {
-        font-size: 17px !important;
-
-    }
-</style>
 @endsection
 @section('content')
 @component('components.breadcrumb')
@@ -190,8 +177,8 @@ Websites
     @endphp
     <div class="col-lg-6">
         <div class="card border btn-soft-success weblistCard ">
-            <div class="card-header d-flex justify-content-between bg-success-subtle ">
-                <a style="font-weight: 700" href="{{ $site->web_url }}" class="card-title mb-0 text-dark">{{
+            <div class="card-header d-flex justify-content-between web-card-header ">
+                <a href="{{ $site->web_url }}" class=" web_url card-title mb-0 text-dark">{{
                     $site->web_url }}</a>
                 <div>
                     <span class="badge bg-success align-middle fs-10"> <i class="fa fa-laptop me-1"
@@ -290,7 +277,7 @@ Websites
                         </a>
                         <a class="btn btn-dark" href="javascript:void(0);"
                             onclick="purchaseWeb({{ $site->id }}, '{{ $site->normal_price }}')">
-                            <span class="">$</span>{{ $site->normal_price }}
+                            <span class="">$</span>{{ $site->normal_price }} 
                         </a>
                     </div>
                 </div>
@@ -322,7 +309,7 @@ Websites
             function purchaseWeb(id, normalPrice) {
                 var webId = id;
                 var price = normalPrice;
-                alert('webId = ' + webId + ' price =' + price);
+                // alert('webId = ' + webId + ' price =' + price);
                 Swal.fire({
                     title: "Are you sure?",
                     text: "Are you sure you want  to purchase this website.",

@@ -203,14 +203,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center p-5">
-                    <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
+                    {{-- <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
                         colors="primary:#121331,secondary:#08a88a" style="width:120px;height:120px">
-                    </lord-icon>
+                    </lord-icon> --}}
+                    <img style="width: 70px;"
+                                class="img-fluid " src="{{ url('build/images/add-web/tick.svg') }}" alt="">
 
                     <div class="mt-4">
                         <h4 class="mb-3">Thank You </h4>
-                        <h3 class="text-muted mb-4">Project created successfully! <img style="width: 30px;"
-                                class="img-fluid " src="{{ url('build/images/add-web/tick.svg') }}" alt="">
+                        <h3 class="text-muted mb-4">Project created successfully!
                         </h3>
                         <div class="hstack gap-2 justify-content-center">
                             <a href="javascript:void(0);" class="btn btn-soft-success" data-bs-dismiss="modal"><i

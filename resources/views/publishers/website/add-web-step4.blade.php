@@ -93,12 +93,14 @@ Add Web
 <div class="row">
     {{-- <div class="col-md-8 col-12 py-2">
 
-         <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show" role="alert">
-             <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - Step 3: Data has been saved successfully.
-             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-         </div>
+        <div class="alert alert-secondary alert-dismissible bg-secondary text-white alert-label-icon fade show"
+            role="alert">
+            <i class="ri-check-double-line label-icon"></i> <strong>Success</strong> - Step 3: Data has been saved
+            successfully.
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
-     </div> --}}
+    </div> --}}
 
     <div class="col-12">
         <!-- Primary Alert -->
@@ -110,89 +112,93 @@ Add Web
 
 
     </div>
-    <div class="col-md-10">
-        <div class="card">
-            <div class="row p-5">
-                {{-- Code --}}
-                <div class="col-md-12">
-                    <div class="card p-3" style="background-color: #d6d6d657">
-                       <ul>
-                        <li class="mb-2">You have 48 hours to accept or reject orders.</li>
-                        <li class="mb-2"> Once the order is finished, you can ask for you payment. Get it in only 10 working days.</li>
-                        <li class="mb-2"> You can connect with the advertiser in the order chat.</li>
-                        <li class="mb-2">  You have a deadline and an established time for each order. Do not forget to check it out!</li>
-                        <li class="mb-2"> Change the price or your web data up to once a month.</li>
-                        <li class="mb-2"> Contact with Support whenever you need it and we answer you in less than 24 hours.</li>
-                       </ul>
+    <div class="col-12">
+        <div class="card tabs-card">
+            <div class="card-body">
+
+                <ul class="nav nav-pills nav-justified mb-3" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
+                            Enter the URL
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-profile-1" role="tab"
+                            aria-disabled="true">
+                            Complete the data
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-messages-1" role="tab"
+                            aria-disabled="true">
+                            Verify your website
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-messages-1" role="tab"
+                            aria-disabled="true">
+
+                                    Finished
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content text-muted">
+                    <div class="tab-pane active" id="pill-justified-home-1" role="tabpanel">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-header">
+                                    <div class="d-flex ">
+                                        <span style="font-size: 18px;" class="badge badge-label bg-warning "><i
+                                            class="mdi mdi-circle-medium"></i> Step-4</span>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row p-5">
+                                    {{-- Code --}}
+                                    <div class="col-md-12">
+                                        <div class="card p-3" style="background-color: #d6d6d657">
+                                            <ul>
+                                                <li class="mb-2">You have 48 hours to accept or reject orders.</li>
+                                                <li class="mb-2"> Once the order is finished, you can ask for you payment. Get it in only 10
+                                                    working days.</li>
+                                                <li class="mb-2"> You can connect with the advertiser in the order chat.</li>
+                                                <li class="mb-2"> You have a deadline and an established time for each order. Do not forget
+                                                    to check it out!</li>
+                                                <li class="mb-2"> Change the price or your web data up to once a month.</li>
+                                                <li class="mb-2"> Contact with Support whenever you need it and we answer you in less than
+                                                    24 hours.</li>
+                                            </ul>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-12 ">
+                                        <form action="{{ route('publishers.store.allSteps') }}" method="POST">
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-success">Finish <i class="fa fa-arrow-right ms-1"
+                                                    aria-hidden="true"></i></button>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
                     </div>
-
-
-
                 </div>
-                <div class="col-12 text-end">
-                    <form action="{{ route('publishers.store.allSteps') }}" method="POST">
-                        @csrf
-
-                        <button type="submit" class="btn btn-success">Finish <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i></button>
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-    </div>
-
-    <div class="col-md-2 col-sm-3 d-none d-sm-block bg-new-lighter p-0 m-0">
-        <div class="lateral-aside">
-            <!-- Step 1 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">Enter the URL</p>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">Complete the data</p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">
-Verify your website</p>
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">Finished</p>
-                </div>
-            </div>
-        </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
     </div>
 </div>
 @endsection

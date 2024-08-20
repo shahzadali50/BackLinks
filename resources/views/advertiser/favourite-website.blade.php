@@ -1,21 +1,7 @@
-<!-- resources/views/advertiser/favourite-website.blade.php -->
-
 @extends('layouts.app')
 
 @section('title')
 Webs | {{ auth()->user()->role }}
-@endsection
-@section('css')
-<style>
-    .weblistCard p {
-        font-size: 14px;
-    }
-
-    .weblistCard i {
-        font-size: 17px !important;
-
-    }
-</style>
 @endsection
 
 @section('content')
@@ -53,9 +39,10 @@ Favourite Websites
     : $delicatedTopics;
     @endphp
     <div class="col-lg-6" id="favorite-{{ $favourite->website->id }}">
-        <div class="card border card-border-info weblistCard ">
-            <div class="card-header d-flex justify-content-between ">
-                <a href="{{ $favourite->website->web_url }}" class="card-title mb-0">{{ $favourite->website->web_url
+        <div class="card border  weblistCard ">
+            <div class="card-header d-flex justify-content-between web-card-header ">
+                <a href="{{ $favourite->website->web_url }}" class=" web_url text-dark card-title mb-0">{{
+                    $favourite->website->web_url
                     }}</a>
                 <div>
                     <span class="badge bg-success align-middle fs-10"> <i class="fa fa-laptop me-1"
@@ -137,7 +124,7 @@ Favourite Websites
                     </div>
                     <hr>
                     <div class="col-12 text-end">
-                        <a style="font-size:16px" href="javascript:void(0);"
+                        <a class="btn btn-dark" href="javascript:void(0);"
                             onclick="purchaseWeb({{ $favourite->website->id }}, '{{ $favourite->website->normal_price }}')">
                             <span class="">$</span>{{ $favourite->website->normal_price }}
                         </a>
@@ -155,63 +142,60 @@ Favourite Websites
 @section('script')
 <script>
     $(document).ready(function() {
-            $('.Project_Language').select2({});
-            $('.Select_Country').select2();
-            $('.links_per_post').select2();
-            $('.links_admitted').select2();
-            $('.delicated_topics').select2();
-            $('.js-example-basic-multiple').select2();
-        });
+        $('.Project_Language').select2({});
+        $('.Select_Country').select2();
+        $('.links_per_post').select2();
+        $('.links_admitted').select2();
+        $('.delicated_topics').select2();
+        $('.js-example-basic-multiple').select2();
+    });
 
-        function submitForm() {
-            document.getElementById('filerWebForm').submit();
-        }
+    function submitForm() {
+        document.getElementById('filerWebForm').submit();
+    }
 
-        function addFavourite(id) {
-            var fileId = id;
-            // alert('Add Favourite'+fileId);
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "{{ route('advertiser.add.favourite') }}",
-                data: {
-                    'fileId': fileId,
-                    '_token': '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.success) {
-                        $('#resetPasswordModal').modal('hide');
-                        Swal.fire({
-                            title: "Thank You 👍",
-                            text: response.message,
-                            icon: "success"
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Wrong",
-                            text: response.message
-                        });
-                    }
-                    var icon = $('#heart-' + fileId);
-                    if (response.message === 'Website added to favourite') {
-                        icon.removeClass('fa-heart-o text-dark ').addClass('fa-heart text-danger');
-                    }
-                     else if (response.message === 'Website removed from favourite')
-                      {
-                        $('#favorite-' + id).fadeOut(300, function() {
+    function addFavourite(id) {
+        var fileId = id;
+        // alert('Add Favourite'+fileId);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{{ route('advertiser.add.favourite') }}",
+            data: {
+                'fileId': fileId,
+                '_token': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    $('#resetPasswordModal').modal('hide');
+                    Swal.fire({
+                        title: "Thank You 👍",
+                        text: response.message,
+                        icon: "success"
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Wrong",
+                        text: response.message
+                    });
+                }
+                var icon = $('#heart-' + fileId);
+                if (response.message === 'Website added to favourite') {
+                    icon.removeClass('fa-heart-o text-dark ').addClass('fa-heart text-danger');
+                } else if (response.message === 'Website removed from favourite') {
+                    $('#favorite-' + id).fadeOut(300, function() {
                         $(this).remove();
                     });
-                        icon.removeClass('fa-heart text-danger').addClass('fa-heart-o text-dark');
-                    }
+                    icon.removeClass('fa-heart text-danger').addClass('fa-heart-o text-dark');
                 }
-            })
+            }
+        })
+    }
 
-
-        }
-        function purchaseWeb(id, normalPrice) {
-                // var webId = id;
-                // var price = normalPrice;
+    function purchaseWeb(id, normalPrice) {
+                var webId = id;
+                var price = normalPrice;
                 // alert('webId = ' + webId + ' price =' + price);
                 Swal.fire({
                     title: "Are you sure?",
@@ -234,7 +218,10 @@ Favourite Websites
                                 '_token': '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                if (response.success) { // Checks if response.success is true
+                                if (response.success) {
+                                     // Checks if response.success is true
+                                     $('#creditAmount').text('$' + response.remainingAmount);
+                                     console.log('Remaining Credit Amount: $' + response.remainingAmount);
                                     Swal.fire({
                                         title: "Thank You 👍",
                                         text: response.message,

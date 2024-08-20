@@ -62,11 +62,49 @@ class MainController extends Controller
     {
         return view('profile_setting.index');
     }
-    public function website()
+    public function website(Request $request)
     {
-        $user = auth()->user();
 
-        $website = Website::where('user_id', $user->id)->get();
+    // Retrieve the currently authenticated user
+    $user = auth()->user();
+
+    // Start building the query with the user's websites
+    $webQuery = Website::where('user_id', $user->id);
+
+    // Apply filters based on request parameters
+    if ($request->query('audience')) {
+        $webQuery->where('audience', 'like', "%" . $request->query('audience') . "%");
+    }
+    if ($request->query('categories')) {
+        $webQuery->where('categories', 'like', "%" . $request->query('categories') . "%");
+    }
+    if ($request->query('link_type')) {
+        $webQuery->where('link_type', 'like', "%" . $request->query('link_type') . "%");
+    }
+    if ($request->query('min_price')) {
+        $webQuery->where('normal_price', '>=', $request->query('min_price'));
+    }
+    if ($request->query('max_price')) {
+        $webQuery->where('normal_price', '<=', $request->query('max_price'));
+    }
+    if ($request->query('sponsorship')) {
+        $webQuery->where('sponsorship', 'like', "%" . $request->query('sponsorship') . "%");
+    }
+    if ($request->query('language')) {
+        $webQuery->where('language', 'like', "%" . $request->query('language') . "%");
+    }
+    if ($request->query('search_query')) {
+        $searchQuery = strtolower($request->query('search_query'));
+        $webQuery->where(function($query) use ($searchQuery) {
+            $query->whereRaw('LOWER(web_url) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(web_description) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(audience) LIKE ?', ["%{$searchQuery}%"])
+                  ->orWhereRaw('LOWER(categories) LIKE ?', ["%{$searchQuery}%"]);
+        });
+    }
+
+    // Execute the query and get the results
+    $website = $webQuery->get();
 
         return view('publishers.website.index', compact('website'));
     }

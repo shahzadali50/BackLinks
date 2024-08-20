@@ -15,10 +15,6 @@
 <link href="{{ URL::asset('build/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 {{-- sweetalert2 --}}
 <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-
-
-
-
 <!-- custom Css-->
 <link href="{{ URL::asset('build/css/custom.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 <style>
@@ -56,6 +52,30 @@
         min-width: 119px;
         font-weight: 900;
     }
+    /* website card css🌟 */
+    .weblistCard:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    .weblistCard p {
+        /* font-size: 14px; */
+    }
+
+    .weblistCard i {
+        font-size: 18px !important;
+
+    }
+    .weblistCard .web_url {
+        font-weight: 700;
+
+    }
+    .tabs-card .nav-link{
+    border-radius: 0px;
+
+   }
+   .web-card-header{
+    background-color: #b3bcd683
+   }
 </style>
 
 @yield('css')

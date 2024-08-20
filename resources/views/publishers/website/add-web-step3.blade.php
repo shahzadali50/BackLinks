@@ -108,121 +108,125 @@ Add Web
 
 
     </div>
-    <div class="col-md-10">
+    <div class="col-12">
+        <div class="card tabs-card">
+            <div class="card-body">
 
-        <div class="card">
+                <ul class="nav nav-pills nav-justified mb-3" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
 
-            <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-1 ">
-                    3. Verify your website</h3>
-                <a href="{{ route('publishers.add.websiteStep4') }}" class="btn btn-success">
-                    Continue<i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
+                            Enter the URL
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-profile-1" role="tab"
+                            aria-disabled="true">
+                            Complete the data
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active " data-bs-toggle="tab" href="#pill-justified-messages-1" role="tab"
+                            aria-disabled="true">
+                            Verify your website
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link disabled " data-bs-toggle="tab" href="#pill-justified-messages-1" role="tab"
+                            aria-disabled="true">
 
-                </a>
-            </div>
-            <div class="row p-3">
-                {{-- Code --}}
-                <div class="col-md-4">
-                    <div class="card text-center" style="background-color: #d6d6d657">
-                        <div class="text-center mt-2">
-                            <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/code.svg') }}">
+                                    Finished
+                        </a>
+                    </li>
 
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content text-muted">
+                    <div class="tab-pane active" id="pill-justified-home-1" role="tabpanel">
+                        <div class="col-12">
+                            <div>
+                                <div class="card-header">
+                                    <div class="d-flex ">
+                                        <span style="font-size: 18px;" class="badge badge-label bg-warning "><i
+                                            class="mdi mdi-circle-medium"></i> Step-3</span>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="row p-3">
+                                        {{-- Code --}}
+                                        <div class="col-md-4">
+                                            <div class="card text-center" style="background-color: #d6d6d657">
+                                                <div class="text-center mt-2">
+                                                    <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/code.svg') }}">
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="">Code</h4>
+                                                    <p class="card-text">Add this code between the head tags of your website</p>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        {{-- Server --}}
+                                        <div class="col-md-4">
+                                            <div class="card text-center" style="background-color: #d6d6d657">
+                                                <div class="text-center mt-2">
+                                                    <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/server.svg') }}">
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="">Server</h4>
+                                                    <p class="card-text">Download the file and upload it to the root folder of your website</p>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        {{-- Analytics --}}
+                                        <div class="col-md-4">
+                                            <div class="card text-center" style="background-color: #d6d6d657">
+                                                <div class="text-center mt-2">
+                                                    <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/analysis.svg') }}">
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4 class="">Analytics</h4>
+                                                    <p class="card-text">Link your Analitycs account and verify your website</p>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-12">
+                                            <a href="{{ route('publishers.add.websiteStep4') }}" class="btn btn-success">
+                                                Continue<i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
+
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h4 class="">Code</h4>
-                            <p class="card-text">Add this code between the head tags of your website</p>
 
-                        </div>
                     </div>
-
-
-
                 </div>
-                {{-- Server --}}
-                <div class="col-md-4">
-                    <div class="card text-center" style="background-color: #d6d6d657">
-                        <div class="text-center mt-2">
-                            <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/server.svg') }}">
-
-                        </div>
-                        <div class="card-body">
-                            <h4 class="">Server</h4>
-                            <p class="card-text">Download the file and upload it to the root folder of your website</p>
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-                {{-- Analytics --}}
-                <div class="col-md-4">
-                    <div class="card text-center" style="background-color: #d6d6d657">
-                        <div class="text-center mt-2">
-                            <img style="width: 80px; height:80px;" src="{{ url('build/images/add-web/analysis.svg') }}">
-
-                        </div>
-                        <div class="card-body">
-                            <h4 class="">Analytics</h4>
-                            <p class="card-text">Link your Analitycs account and verify your website</p>
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="col-md-2 col-sm-3 d-none d-sm-block bg-new-lighter p-0 m-0">
-        <div class="lateral-aside">
-            <!-- Step 1 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">Enter the URL</p>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep"><i class="fa fa-check" aria-hidden="true"></i></div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">Complete the data</p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-activep">3</div>
-                    <div class="line-pasos-donep"></div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos-active">
-                        Verify your website</p>
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="div-paso">
-                <div class="badges-pasos">
-                    <div class="circle-pasos circle-inactive">4</div>
-                </div>
-                <div class="texto-pasos">
-                    <p class="p-pasos">Finished</p>
-                </div>
-            </div>
-        </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
     </div>
 </div>
 @endsection

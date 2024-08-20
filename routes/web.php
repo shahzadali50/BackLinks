@@ -35,7 +35,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/websites/add/step-4', [WebsiteController::class, 'add_web_step4'])->name('add.websiteStep4');
     Route::post('/form/step1', [WebsiteController::class, 'postStep1'])->name('form.postStep1');
     Route::post('form/step2', [WebsiteController::class, 'postStep2'])->name('form.postStep2');
-    Route::post('website/delete/{id}', [WebsiteController::class, 'webDelete'])->name('websiteDelete');
+    Route::delete('website/delete/{id}', [WebsiteController::class, 'webDelete'])->name('websiteDelete');
     Route::post('/website/finish', [WebsiteController::class, 'storeAllStep'])->name('store.allSteps');
 
 
@@ -123,4 +123,17 @@ Route::get('/run-migration', function () {
 
     // Return the output to the browser or redirect back with a message
     return redirect()->back()->with('success', "Migration executed successfully. Output: " . nl2br($output));
+});
+
+// storage link route
+Route::get('/run-storage-link', function () {
+    // Run the storage:link command
+    Artisan::call('storage:link');
+
+    // Get the output from the command
+    $output = Artisan::output();
+    return $output;
+
+    // Return the output to the browser or redirect back with a message
+    return redirect()->back()->with('success', "Storage link created successfully. Output: " . nl2br($output));
 });
