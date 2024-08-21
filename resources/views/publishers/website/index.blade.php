@@ -22,7 +22,7 @@ Website
 @endcomponent
 <div class="row">
     <div class="col-8 py-3">
-        @if(session('error'))
+        @if (session('error'))
         <!-- Danger Alert -->
         <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
             <strong>Error</strong> - {{ session('error') }}
@@ -58,10 +58,10 @@ Website
                     <div class="mb-3">
                         <label for="Select_Country">Search by Country
                         </label>
-                        <select name="audience" class="Select_Country" onchange="submitForm()">
+                        <select name="audience" class="selectTwo" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('countries.countries') as $country)
-                            <option value="{{ $country }}" {{ old('audience')==$country ? 'selected' : '' }}>
+                            <option value="{{ $country }}" {{ old('audience') == $country ? 'selected' : '' }}>
                                 {{ $country }}</option>
                             @endforeach
 
@@ -74,7 +74,7 @@ Website
                     <div class="mb-3">
                         <label for="Select_Country">Search by categories
                         </label>
-                        <select name="categories" class="Select_Country" onchange="submitForm()">
+                        <select name="categories" class="selectTwo" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('categories.categories') as $category)
                             <option value="{{ $category['label'] }}">
@@ -89,8 +89,7 @@ Website
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label> Search by type of links admitted <span class="text-danger">*</span></label>
-                        <select name="link_type" class="js-example-basic-single links_admitted" id="links_admitted"
-                            onchange="submitForm()">
+                        <select name="link_type" class="selectTwo" id="links_admitted" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             <option value="Follow">Follow
                             </option>
@@ -107,7 +106,7 @@ Website
                         <div>
                             <label for="Website_Language"> Search by Language <span class="text-danger">*</span></label>
                         </div>
-                        <select required class="js-example-basic-multiple" name="language" id="Website_Language"
+                        <select required class="selectTwo" name="language" id="Website_Language"
                             onchange="submitForm()">
                             <option value="" disabled selected>Select a Language</option>
                             <option value="catalan">Catalán</option>
@@ -148,7 +147,7 @@ Website
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label>Search by Sponsorship notification </label>
-                        <select name="sponsorship" class="delicated_topics" onchange="submitForm()">
+                        <select name="sponsorship" class="selectTwo" onchange="submitForm()">
                             <option value="">Select an options</option>
 
                             <option value="Always">Always
@@ -208,7 +207,7 @@ Website
                         ? implode(', ', $delicatedTopics)
                         : $delicatedTopics;
                         @endphp
-                        <tr id="websiteRow-{{$site->id}}" data-id="{{ $site->id }}">
+                        <tr id="websiteRow-{{ $site->id }}" data-id="{{ $site->id }}">
 
                             <td>{{ $loop->iteration }} </td>
                             <td>
@@ -220,7 +219,6 @@ Website
                                     title="{{ $categoriesList }}">
                                     <i class="fa fa-tags" aria-hidden="true"></i>
                                 </button>
-
 
                             </td>
                             <td> <button style="padding: 0px; width:21px; height:21px;" type="button"
@@ -238,43 +236,40 @@ Website
                                 </button></td>
                             <td id="status-{{ $site->id }}">
                                 @if ($site->website_status == 'pending')
-                                <span style="font-size: 12px;" class="badge bg-primary">{{ $site->website_status
-                                    }}</span>
+                                <span style="font-size: 12px;"
+                                    class="badge bg-primary">{{ $site->website_status }}</span>
                                 @elseif($site->website_status == 'approve')
-                                <span style="font-size: 12px;" class="badge bg-success">{{ $site->website_status
-                                    }}</span>
+                                <span style="font-size: 12px;"
+                                    class="badge bg-success">{{ $site->website_status }}</span>
                                 @elseif($site->website_status == 'rejected')
-                                <span style="font-size: 12px;" class="badge bg-danger">{{ $site->website_status
-                                    }}</span>
+                                <span style="font-size: 12px;"
+                                    class="badge bg-danger">{{ $site->website_status }}</span>
                                 @endif
 
                             </td>
-                            <td>{{$site->created_at->format('d F Y') }}</td>
+                            <td>{{ $site->created_at->format('d F Y') }}</td>
 
                             <td class="d-flex">
                                 <!-- View Button -->
                                 <a href="{{ route('publishers.website.detail', ['encodedId' => base64_encode($site->id)]) }}"
                                     class="btn btn-outline-primary btn-icon waves-effect waves-light me-2"
-                                    style="padding: 0px; width:21px; height:21px;"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View Website">
+                                    style="padding: 0px; width:21px; height:21px;" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="View Website">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
 
                                 <!-- Delete Button -->
-                                <form  method="POST" data-id="{{ $site->id }}">
+                                <form method="POST" data-id="{{ $site->id }}">
                                     @csrf
                                     <button type="button"
-                                            class="btn btn-outline-danger btn-icon waves-effect waves-light deletewebBtn"
-                                            style="padding: 0px; width:21px; height:21px;"
-                                            data-bs-toggle="modal" data-bs-target="#delete"
-                                            data-id="{{ $site->id }}"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Delete Website">
+                                        class="btn btn-outline-danger btn-icon waves-effect waves-light deletewebBtn"
+                                        style="padding: 0px; width:21px; height:21px;" data-bs-toggle="modal"
+                                        data-bs-target="#delete" data-id="{{ $site->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete Website">
                                         <i class="ri-delete-bin-5-line"></i>
                                     </button>
                                 </form>
                             </td>
-
 
                         </tr>
                         @endforeach
@@ -321,77 +316,69 @@ Website
 <script src="{{ URL::asset('build/js/pages/datatables.init.js') }}"></script>
 <script>
     $(document).ready(function() {
-        @if (session('success'))
-            Swal.fire({
-                title: 'Thank You 👍',
-                text: '{{ session('success') }}',
-                icon: 'success'
-            });
+        @if(session('success'))
+        Swal.fire({
+            title: 'Thank You 👍',
+            text: '{{ session('
+            success ') }}',
+            icon: 'success'
+        });
         @endif
     });
-    function submitForm() {
-                document.getElementById('filerWebForm').submit();
-            }
-    $(document).ready(function() {
-                $('.Project_Language').select2();
-                $('.Select_Country').select2();
-                $('.links_per_post').select2();
-                $('.links_admitted').select2();
-                $('.delicated_topics').select2();
-                $('.js-example-basic-multiple').select2();
-            });
 
+    function submitForm() {
+        document.getElementById('filerWebForm').submit();
+    }
+    $(document).ready(function() {
+        $('.selectTwo').select2();
+    });
 </script>
 <script>
     $(document).ready(function() {
-    var webId;
-
-    // Set webId when delete button is clicked
-    $('.deletewebBtn').on('click', function() {
-        webId = $(this).data('id');
-    });
-
-    // Handle the confirm delete action
-    $('#confirmDeleteBtn').on('click', function() {
-        var token = $("input[name='_token']").val();
-
-        $.ajax({
-            url: "{{ route('publishers.websiteDelete', '') }}/" + webId,
-            type: 'POST',
-            data: {
-                _token: token,
-                _method: 'DELETE'
-            },
-            success: function(response) {
-                if (response.success) {
-                    Swal.fire({
-                        title: "Thank You 👍",
-                        text: response.message,
-                        icon: "success"
-                    });
-
-                    $('#websiteRow-' + webId).remove(); // Correctly removing the row with the website ID
-                } else {
+        var webId;
+        // Set webId when delete button is clicked
+        $('.deletewebBtn').on('click', function() {
+            webId = $(this).data('id');
+        });
+        // Handle the confirm delete action
+        $('#confirmDeleteBtn').on('click', function() {
+            var token = $("input[name='_token']").val();
+            $.ajax({
+                url: "{{ route('publishers.websiteDelete', '') }}/" + webId,
+                type: 'POST',
+                data: {
+                    _token: token,
+                    _method: 'DELETE'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: "Thank You 👍",
+                            text: response.message,
+                            icon: "success"
+                        });
+                        $('#websiteRow-' + webId)
+                            .remove(); // Correctly removing the row with the website ID
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: response.message,
+                        });
+                    }
+                    $('#delete').modal('hide'); // Hide the modal
+                },
+                error: function() {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: response.message,
+                        text: 'Something went wrong while deleting the website.',
                     });
+                    $('#delete').modal('hide'); // Hide the modal
                 }
-                $('#delete').modal('hide'); // Hide the modal
-            },
-            error: function() {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: 'Something went wrong while deleting the website.',
-                });
-                $('#delete').modal('hide'); // Hide the modal
-            }
+            });
         });
     });
-});
-
 </script>
 
 </script>

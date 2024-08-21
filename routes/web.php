@@ -23,7 +23,7 @@ Route::middleware(['auth'])->as('user.')->prefix('user')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-// publishers Routes
+// publishers Routes🌟
 Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers')->group(function () {
 
     Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
@@ -55,7 +55,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
-// advertiser Routes
+// advertiser Routes🌟
 Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser')->group(function () {
     Route::get('/home', [MainController::class, 'advertiserDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::get('favourite/websites', [MainController::class, 'favouriteWeb'])->name('favourireWeb');
 
 });
-// admin Routes
+// admin Routes🌟
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
@@ -107,9 +107,6 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('/website/rejected', [AdminController::class, 'website_rejected'])->name('website.rejected');
 
     Route::post('/website/status', [AdminController::class, 'change_status'])->name('website.status');
-
-
-
 });
 
 
@@ -117,11 +114,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
 Route::get('/run-migration', function () {
     // Run the migration command
     Artisan::call('migrate');
-
     // Get the output from the migration command
     $output = Artisan::output();
     return $output;
-
     // Return the output to the browser or redirect back with a message
     return redirect()->back()->with('success', "Migration executed successfully. Output: " . nl2br($output));
 });
@@ -130,17 +125,14 @@ Route::get('/run-migration', function () {
 Route::get('/run-storage-link', function () {
     // Run the storage:link command
     Artisan::call('storage:link');
-
     // Get the output from the command
     $output = Artisan::output();
     return $output;
-
     // Return the output to the browser or redirect back with a message
     // return redirect()->back()->with('success', "Storage link created successfully. Output: " . nl2br($output));
 });
     Route::get('/run-optimize-clear', function () {
         Artisan::call('optimize:clear');
-
         // Get the output from the command
         $output = Artisan::output();
         return $output;

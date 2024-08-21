@@ -2,9 +2,6 @@
 @section('title')
 Webs | {{ auth()->user()->role }}
 @endsection
-@section('css')
-
-@endsection
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1')
@@ -22,8 +19,6 @@ Websites
             your target audience, content type, and budget. Whether you're looking to increase brand awareness, drive
             traffic, or generate leads, our curated selection of websites will help you achieve your goals.</p>
     </div>
-
-
 
 </div>
 <div class="card px-4">
@@ -271,13 +266,12 @@ Websites
                     </div>
                     <hr>
                     <div class="col-12 d-flex justify-content-between ">
-                        <a class="btn btn-soft-success"
-                            href="javascript:void(0);">
+                        <a class="btn btn-soft-success" href="javascript:void(0);">
                             <i class="fa fa-eye"></i> More details
                         </a>
                         <a class="btn btn-dark" href="javascript:void(0);"
                             onclick="purchaseWeb({{ $site->id }}, '{{ $site->normal_price }}')">
-                            <span class="">$</span>{{ $site->normal_price }} 
+                            <span class="">$</span>{{ $site->normal_price }}
                         </a>
                     </div>
                 </div>
@@ -287,116 +281,115 @@ Websites
     @endforeach
     @endif
 
-
     @endsection
-
 
     @section('script')
     <script>
         $(document).ready(function() {
-                $('.Project_Language').select2();
-                $('.Select_Country').select2();
-                $('.links_per_post').select2();
-                $('.links_admitted').select2();
-                $('.delicated_topics').select2();
-                $('.js-example-basic-multiple').select2();
-            });
+            $('.Project_Language').select2();
+            $('.Select_Country').select2();
+            $('.links_per_post').select2();
+            $('.links_admitted').select2();
+            $('.delicated_topics').select2();
+            $('.js-example-basic-multiple').select2();
+        });
 
-            function submitForm() {
-                document.getElementById('filerWebForm').submit();
-            }
-            // purchaseWeb
-            function purchaseWeb(id, normalPrice) {
-                var webId = id;
-                var price = normalPrice;
-                // alert('webId = ' + webId + ' price =' + price);
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "Are you sure you want  to purchase this website.",
-                    icon: "info",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, purchase it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Proceed with the AJAX request if confirmed
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: "{{ route('advertiser.purchase.web') }}",
-                            data: {
-                                'webId': id,
-                                'price': normalPrice,
-                                '_token': '{{ csrf_token() }}'
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                     // Checks if response.success is true
-                                     $('#creditAmount').text('$' + response.remainingAmount);
-                                     console.log('Remaining Credit Amount: $' + response.remainingAmount);
-                                    Swal.fire({
-                                        title: "Thank You 👍",
-                                        text: response.message,
-                                        icon: "success"
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: "error",
-                                        title: "Wrong",
-                                        text: response.message
-                                    });
-                                }
-                            },
-                            error: function(xhr) {
-                                let message = 'Something went wrong!';
-                                if (xhr.responseJSON && xhr.responseJSON.message) {
-                                    message = xhr.responseJSON.message;
-                                }
+        function submitForm() {
+            document.getElementById('filerWebForm').submit();
+        }
+        // purchaseWeb
+        function purchaseWeb(id, normalPrice) {
+            var webId = id;
+            var price = normalPrice;
+            // alert('webId = ' + webId + ' price =' + price);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want  to purchase this website.",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, purchase it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Proceed with the AJAX request if confirmed
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "{{ route('advertiser.purchase.web') }}",
+                        data: {
+                            'webId': id,
+                            'price': normalPrice,
+                            '_token': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Checks if response.success is true
+                                $('#creditAmount').text('$' + response.remainingAmount);
+                                console.log('Remaining Credit Amount: $' + response
+                                .remainingAmount);
                                 Swal.fire({
-                                    icon: 'error',
-                                    title: 'Wrong',
-                                    text: message,
+                                    title: "Thank You 👍",
+                                    text: response.message,
+                                    icon: "success"
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Wrong",
+                                    text: response.message
                                 });
                             }
+                        },
+                        error: function(xhr) {
+                            let message = 'Something went wrong!';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Wrong',
+                                text: message,
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        // addFavourite
+        function addFavourite(id) {
+            var fileId = id;
+            // alert('Add Favourite'+fileId);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ route('advertiser.add.favourite') }}",
+                data: {
+                    'fileId': fileId,
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: "Thank You 👍",
+                            text: response.message,
+                            icon: "success"
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Wrong",
+                            text: response.message
                         });
                     }
-                });
-            }
-            // addFavourite
-            function addFavourite(id) {
-                var fileId = id;
-                // alert('Add Favourite'+fileId);
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: "{{ route('advertiser.add.favourite') }}",
-                    data: {
-                        'fileId': fileId,
-                        '_token': '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: "Thank You 👍",
-                                text: response.message,
-                                icon: "success"
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Wrong",
-                                text: response.message
-                            });
-                        }
-                        var icon = $('#heart-' + fileId);
-                        if (response.message === 'Website added to favourite') {
-                            icon.removeClass('fa-heart-o text-dark ').addClass('fa-heart text-danger');
-                        } else if (response.message === 'Website removed from favourite') {
-                            icon.removeClass('fa-heart text-danger').addClass('fa-heart-o text-dark');
-                        }
+                    var icon = $('#heart-' + fileId);
+                    if (response.message === 'Website added to favourite') {
+                        icon.removeClass('fa-heart-o text-dark ').addClass('fa-heart text-danger');
+                    } else if (response.message === 'Website removed from favourite') {
+                        icon.removeClass('fa-heart text-danger').addClass('fa-heart-o text-dark');
                     }
-                })
-            }
+                }
+            })
+        }
     </script>
     @endsection
