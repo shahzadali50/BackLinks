@@ -75,7 +75,9 @@ Add Web
                                                     </label>
                                                     <input name="web_url" type="url" class="form-control" id="web_url" value="{{ old('web_url') }}" placeholder="https://www.publisuites.com" required>
                                                     @error('web_url')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>

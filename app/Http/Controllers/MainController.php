@@ -104,7 +104,7 @@ class MainController extends Controller
     }
 
     // Execute the query and get the results
-    $website = $webQuery->get();
+    $website = $webQuery->orderBy('created_at', 'desc')->get();
 
         return view('publishers.website.index', compact('website'));
     }
@@ -147,7 +147,7 @@ class MainController extends Controller
     {
         $userId=Auth::user()->id;
         $totalAmount = AddCredit::where('user_id', $userId)->sum('amount');
-        $creditDetail = AddCredit::where('user_id', $userId)  ->orderBy('created_at', 'desc')->get();
+        $creditDetail = AddCredit::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
 
         return view('advertiser.wallet', compact('totalAmount','creditDetail'));
     }

@@ -41,7 +41,7 @@ Profile-Setting
             </div>
         </div>
     </div>
-    {{-- Update Profile --}}
+    {{-- Update Profile 🌟--}}
     {{-- <div class="col-12">
         <div class="card mt-xxl-n5">
             <div class="card-header">

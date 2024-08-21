@@ -4,81 +4,14 @@ Add Web | {{ auth()->user()->role }}
 @endsection
 @section('css')
 <style>
-    .bg-new-lighter {
-        background-color: #f8f9fa;
-        /* Adjust as needed */
-    }
+    .form-check-input[type=checkbox] {
+    border-radius: 0px;
+    width: 16px !important;
+    height: 16px !important;
 
-    .lateral-aside {
-        padding: 10px;
-    }
-
-    .div-paso {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .badges-pasos {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 10px;
-    }
-
-    .circle-pasos {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        color: white;
-    }
-
-    .circle-activep {
-        background-color: #28a745;
-        /* Green for active/completed steps */
-    }
-
-    .circle-inactive {
-        background-color: #6c757d;
-        /* Gray for inactive steps */
-    }
-
-    .check-pasos {
-        font-size: 16px;
-    }
-
-    .line-pasos,
-    .line-pasos-donep {
-        width: 2px;
-        height: 30px;
-        background-color: #6c757d;
-        /* Gray for default lines */
-    }
-
-    .line-pasos-donep {
-        background-color: #28a745;
-    }
-
-    .texto-pasos {
-        flex: 1;
-    }
-
-    .p-pasos-active {
-        font-weight: bold;
-        color: #28a745;
-        /* Green for active text */
-    }
-
-    .p-pasos {
-        font-weight: normal;
-        color: #6c757d;
-        /* Gray for inactive text */
-    }
+}
 </style>
+
 @endsection
 @section('content')
 @component('components.breadcrumb')
@@ -157,10 +90,13 @@ Add Web
                                                     class="text-danger">*</span> <small class="text-body-tertiary">(It is not
                                                     allowed to add contact details)</small>
                                             </label>
-                                                <textarea required id="website_description" class="form-control" name="web_description"  cols="" rows="5"> {{ old('web_description') }}</textarea>
-                                                @error('web_description')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                            @error('web_description')
+                                            <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                            </div>
+                                            @enderror
+                                                <textarea  id="website_description" class="form-control" name="web_description"  cols="" rows="5"> {{ old('web_description') }}</textarea>
+
                                             </div>
 
 
@@ -170,6 +106,7 @@ Add Web
                                                     <label for="Select_Country">Your main audience is from (country): <span
                                                             class="text-danger">*</span></label>
                                                     <select name="audience" class="Select_Country">
+                                                        <option value="" disabled selected>Select an options</option>
                                                         @foreach(config('countries.countries') as $country)
                                                         <option value="{{ $country }}" {{ old('audience')==$country ? 'selected' : '' }}>{{
                                                             $country }}</option>
@@ -178,7 +115,9 @@ Add Web
 
                                                     </select>
                                                     @error('audience')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -194,7 +133,9 @@ Add Web
 
                                                     </select>
                                                     @error('images_per_post')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -209,7 +150,9 @@ Add Web
                                                             @endfor
                                                     </select>
                                                     @error('post_link')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -228,7 +171,9 @@ Add Web
                                                             Sponsored</option>
                                                     </select>
                                                     @error('link_type')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -237,7 +182,7 @@ Add Web
                                                     <div>
                                                         <label for="Website_Language">Language(s) of your Website <span class="text-danger">*</span></label>
                                                     </div>
-                                                    <select required class="js-example-basic-multiple" name="language" id="Website_Language">
+                                                    <select  class="js-example-basic-multiple" name="language" id="Website_Language">
                                                         <option value="" disabled selected>Select a Language</option>
                                                         <option value="catalan" {{ old('language') == 'catalan' ? 'selected' : '' }}>Catalán</option>
                                                         <option value="english" {{ old('language') == 'english' ? 'selected' : '' }}>English</option>
@@ -250,20 +195,26 @@ Add Web
                                                         <option value="spanish" {{ old('language') == 'spanish' ? 'selected' : '' }}>Spanish</option>
                                                     </select>
                                                     @error('language')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
 
                                             {{-- Select your website categories (maximum 3) * --}}
                                             <div class="col-12 mt-3">
-                                                <label>Select your website categories (maximum 3)<span class="text-danger">*</span></label>
+                                                <label>Select your website categories <span class="text-danger">(maximum 3)*</span></label>
+
                                                 @error('categories')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                </div>
                                                 @enderror
-                                                <div class="d-flex flex-wrap">
+                                                <div class="row">
                                                     @foreach (config('categories.categories') as $category)
-                                                    <div class="form-check form-check-info mb-3 mx-3">
+                                                  <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <div class="form-check form-check-success mb-3 mx-3">
                                                         <input id="checkbox-category-{{ $category['id'] }}" name="categories[]"
                                                             class="form-check-input" type="checkbox" value="{{ $category['label'] }}" {{
                                                             in_array($category['label'], old('categories', [])) ? 'checked' : '' }}>
@@ -271,6 +222,7 @@ Add Web
                                                             {{ $category['label'] }}
                                                         </label>
                                                     </div>
+                                                  </div>
                                                     @endforeach
 
                                                 </div>
@@ -289,7 +241,9 @@ Add Web
                                                         @endforeach
                                                     </select>
                                                     @error('delicated_topics')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -308,7 +262,9 @@ Add Web
 
                                                     </select>
                                                     @error('sponsorship')
-                                                    <span class="text-danger">{{ $message }}</span>
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -322,7 +278,9 @@ Add Web
                                                     </label>
                                                 </div>
                                                 @error('your_website')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                </div>
                                                 @enderror
                                             </div>
                                             {{-- Do you publish in related categories? --}}
@@ -336,7 +294,9 @@ Add Web
                                                     </label>
                                                 </div>
                                                 @error('publish_categories')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                </div>
                                                 @enderror
                                             </div>
                                             {{-- Sponsored post price --}}
@@ -344,6 +304,11 @@ Add Web
                                                 <h5> Sponsored post price <span class="text-danger">*</span></h5>
                                                 <div class="border p-4">
                                                     <h6>Normal price</h6>
+                                                    @error('normal_price')
+                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                    </div>
+                                                    @enderror
                                                     <div class="alert alert-secondary" role="alert">
                                                         <strong> This is amount that we will pay you for every sponsored post of 500
                                                             palabras you write. The amount is the suggested according to your SEO metrics,
@@ -351,13 +316,11 @@ Add Web
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">€</span>
-                                                        <input name="normal_price" type="number" value="{{ old('normal_price', 50) }}"
+                                                        <input name="normal_price" type="number" value="{{ old('normal_price') }}"
                                                             class="form-control" step="0.5">
 
                                                     </div>
-                                                    @error('normal_price')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+
                                                     <div>
 
                                                     </div>
@@ -374,7 +337,9 @@ Add Web
                                                         <input name="dedicated_price" type="number"
                                                             value="{{ old('dedicated_price', 100) }}" class="form-control" step="0.5">
                                                         @error('delicated_price')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                        </div>
                                                         @enderror
                                                     </div>
                                                 </div>
@@ -403,7 +368,9 @@ Add Web
 
                                                                 </div>
                                                                 @error('800_words')
-                                                                <span class="text-danger">{{ $message }}</span>
+                                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                </div>
                                                                 @enderror
                                                                 <div>
                                                                 </div>
@@ -418,7 +385,9 @@ Add Web
 
                                                                 </div>
                                                                 @error('1000_words')
-                                                                <span class="text-danger">{{ $message }}</span>
+                                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                </div>
                                                                 @enderror
                                                                 <div>
                                                                 </div>
@@ -433,7 +402,9 @@ Add Web
 
                                                                 </div>
                                                                 @error('1200_words')
-                                                                <span class="text-danger">{{ $message }}</span>
+                                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                </div>
                                                                 @enderror
                                                                 <div>
                                                                 </div>
@@ -460,7 +431,9 @@ Add Web
                                                                     <input value="{{ old('facebook_link') }}" name="facebook_link"
                                                                         type="url" class="form-control" placeholder="publishers">
                                                                     @error('facebook_link')
-                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                    </div>
                                                                     @enderror
                                                                 </div>
                                                                 <div>
@@ -473,7 +446,9 @@ Add Web
                                                                     <input value="{{ old('x_link') }}" name="x_link" type="url"
                                                                         class="form-control" placeholder="publishers">
                                                                     @error('x_link')
-                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                    </div>
                                                                     @enderror
                                                                 </div>
                                                                 <div>
@@ -487,7 +462,9 @@ Add Web
                                                                     <input value="{{ old('linkedin_link') }}" name="linkedin_link"
                                                                         type="url" class="form-control" placeholder="publishers">
                                                                     @error('linkedin_link')
-                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                    </div>
                                                                     @enderror
                                                                 </div>
                                                                 <div>
@@ -502,7 +479,9 @@ Add Web
                                                                     <input value="{{ old('diffusion_price') }}" name="diffusion_price"
                                                                         type="number" class="form-control">
                                                                     @error('diffusion_price')
-                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                                                    </div>
                                                                     @enderror
                                                                 </div>
                                                                 <div>
