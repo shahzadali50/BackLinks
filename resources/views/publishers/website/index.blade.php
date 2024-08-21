@@ -40,7 +40,7 @@ Website
         <form action="" id="filerWebForm">
             <div class="row py-3">
                 <div class="col-12 text-end">
-                    <a href="{{ route('advertiser.webs.list') }}" class="btn btn-dark"> <i class="fa fa-search me-1"
+                    <a href="{{ route('publishers.website') }}" class="btn btn-dark"> <i class="fa fa-search me-1"
                             aria-hidden="true"></i>All Results</a>
                 </div>
                 <div class="col-12 py-3">

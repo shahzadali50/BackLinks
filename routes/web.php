@@ -120,6 +120,7 @@ Route::get('/run-migration', function () {
 
     // Get the output from the migration command
     $output = Artisan::output();
+    return $output;
 
     // Return the output to the browser or redirect back with a message
     return redirect()->back()->with('success', "Migration executed successfully. Output: " . nl2br($output));
@@ -135,5 +136,14 @@ Route::get('/run-storage-link', function () {
     return $output;
 
     // Return the output to the browser or redirect back with a message
-    return redirect()->back()->with('success', "Storage link created successfully. Output: " . nl2br($output));
+    // return redirect()->back()->with('success', "Storage link created successfully. Output: " . nl2br($output));
 });
+    Route::get('/run-optimize-clear', function () {
+        Artisan::call('optimize:clear');
+
+        // Get the output from the command
+        $output = Artisan::output();
+        return $output;
+        // Combine the outputs
+        // $output = "Storage Link Output: " . $storageOutput . "<br><br>" . "Optimize Clear Output: " . $optimizeOutput;
+    });

@@ -42,7 +42,7 @@ Profile-Setting
         </div>
     </div>
     {{-- Update Profile --}}
-    <div class="col-12">
+    {{-- <div class="col-12">
         <div class="card mt-xxl-n5">
             <div class="card-header">
                 <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
@@ -96,7 +96,7 @@ Profile-Setting
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- Change Password🌟 --}}
     <div class="col-12">
         <div class="card mt-xxl-n5">
