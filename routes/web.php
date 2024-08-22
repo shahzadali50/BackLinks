@@ -68,8 +68,12 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::post('/projects/create/step-1', [ProjectController::class, 'storeStep1'])->name('storeStep1');
     Route::post('/projects/create/step-2', [ProjectController::class, 'storeStep2'])->name('storeStep2');
     Route::post('/projects/create/step-3', [ProjectController::class, 'storeStep3'])->name('storeStep3');
-    // Route::post('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+    Route::post('/projects/update/step-1/{id}', [ProjectController::class, 'updateStep1'])->name('update.step1');
+    Route::post('/projects/update/step-2/{id}', [ProjectController::class, 'updateStep2'])->name('update.step2');
+    Route::post('/projects/update/step-3/{id}', [ProjectController::class, 'updateStep3'])->name('update.step3');
     Route::delete('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
+    Route::get('/projects/detail/{encodedId}', [ProjectController::class, 'projectDetail'])->name('project.detail');
+    Route::get('/projects/edit/{encodedId}', [ProjectController::class, 'projectEdit'])->name('project.edit');
 
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
     Route::post('/purchase/web', [PurchaseWebController::class, 'purchase_web'])->name('purchase.web');

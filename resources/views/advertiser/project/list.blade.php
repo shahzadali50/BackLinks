@@ -161,30 +161,34 @@
                                     {{-- track_device💛 --}}
                                         <td>{{ $project->track_device }}</td>
 
-                                        <td>
-                                            <div class="dropdown d-inline-block">
-                                                <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill align-middle"></i>
+                                        <td class="d-flex">
+                                            {{-- edit --}}
+                                            <a href="{{ route('advertiser.project.edit', ['encodedId' => base64_encode($project->id)]) }}"
+                                                class="btn btn-outline-success btn-icon waves-effect waves-light me-2"
+                                                style="padding: 0px; width:21px; height:21px;"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Edit project">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </a>
+                                            {{-- view --}}
+                                            <a href="{{ route('advertiser.project.detail', ['encodedId' => base64_encode($project->id)]) }}"
+                                                class="btn btn-outline-primary btn-icon waves-effect waves-light me-2"
+                                                style="padding: 0px; width:21px; height:21px;"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="View project">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+
+                                             {{-- delete --}}
+                                            <form class="deleteProjectForm" data-id="{{ $project->id }}" method="POST">
+                                                @csrf
+                                                <button type="button" class="btn btn-outline-danger btn-icon waves-effect waves-light deleteProjectBtn"
+                                                    style="padding: 0px; width:21px; height:21px;"
+                                                    data-bs-toggle="modal" data-bs-target="#delete"
+                                                    data-id="{{ $project->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete project">
+                                                    <i class="ri-delete-bin-5-line"></i>
                                                 </button>
-                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li>
-                                                        <form class="deleteProjectForm" data-id="{{ $project->id }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <button type="button"
-                                                                class="dropdown-item edit-item-btn deleteProjectBtn"
-                                                                data-bs-toggle="modal" data-bs-target="#delete"
-                                                                data-id="{{ $project->id }}">
-                                                                <i
-                                                                    class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

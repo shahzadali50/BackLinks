@@ -63,8 +63,8 @@ Add Project
         </div>
         @endif --}}
     </div>
-    <div class="col-xxl-6">
-        
+    <div class="col-12">
+
         <div class="card">
             <div class="card-body">
                 <ul class="nav nav-pills nav-justified mb-3" role="tablist">
