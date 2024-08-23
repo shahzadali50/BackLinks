@@ -216,7 +216,7 @@ Profile-Setting
                 <div class="tab-content">
                     <div class="tab-pane active " id="personalDetails" role="tabpanel">
                         <form
-                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.email') : (Auth::user()->role == 'admin' ? route('admin.update.email') : route('publishers.update.email')) }}"
+                            action="{{ Auth::user()->role == 'advertiser' ? route('advertiser.update.email.request') : (Auth::user()->role == 'admin' ? route('admin.update.email.request') : route('publishers.update.email.request')) }}"
                             method="POST">
                             @csrf
 
@@ -224,10 +224,10 @@ Profile-Setting
 
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="old_email" class="form-label">Old Email Address</label>
+                                        <label for="old_email" class="form-label">Enter Old Email Address</label>
                                         <input required name="old_email" type="email"
                                             class="form-control @error('old_email') is-invalid @enderror" id="old_email"
-                                            placeholder="Enter Old Email" value="{{ old('old_email') }}">
+                                            placeholder="Enter Old Email Address" value="{{ old('old_email') }}">
                                         @error('old_email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -235,24 +235,11 @@ Profile-Setting
                                         @enderror
                                     </div>
                                 </div>
-                                <!--end col-->
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="new_email" class="form-label">New Email Address</label>
-                                        <input required name="new_email" type="email"
-                                            class="form-control @error('new_email') is-invalid @enderror" id="new_email"
-                                            placeholder="Enter New Email" value="{{ old('new_email') }}">
-                                        @error('new_email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
+
 
                                 <!--end col-->
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-dark">Update</button>
+                                    <button type="submit" class="btn btn-dark">Reset Email Address</button>
                                 </div>
                                 <!--end col-->
                             </div>

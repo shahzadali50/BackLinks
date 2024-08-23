@@ -10,6 +10,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\AddCreditController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ResetEmailController;
 use App\Http\Controllers\PurchaseWebController;
 
 Route::get('/', [MainController::class, 'index'])->name('home');
@@ -36,7 +37,7 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::post('/website/finish', [WebsiteController::class, 'storeAllStep'])->name('store.allSteps');
     Route::get('/sponsored', [MainController::class, 'sponsoredList'])->name('sponsored');
     Route::get('/contact-support', [MainController::class, 'ContactSupport'])->name('ContactSupport');
-    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    // Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
     Route::get('/explore-now', [MainController::class, 'exploreNow'])->name('explore');
     Route::get('/membership', [MainController::class, 'membership'])->name('membership');
     Route::get('/payments/transactions', [MainController::class, 'transactions'])->name('transactions');
@@ -44,15 +45,19 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::get('/support-ticket/ticket-list', [MainController::class, 'list'])->name('ticket.list');
     Route::get('/chat', [MainController::class, 'chat'])->name('chat');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
-    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    // Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
+    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    Route::post('/update-email/request', [ResetEmailController::class, 'updateEmailRequest'])->name('update.email.request');
+    Route::post('/verify-email-otp', [ResetEmailController::class, 'verify_email_otp'])->name('verify.email.otp');
+    Route::get('/reset-email-address', [ResetEmailController::class, 'reset_email_address'])->name('reset.email.address');
 
 });
 // advertiser Routes🌟
 Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser')->group(function () {
     Route::get('/home', [MainController::class, 'advertiserDashboard'])->name('dashboard');
-    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+
     Route::get('/contact-support', [MainController::class, 'ContactSupport'])->name('ContactSupport');
     Route::get('/wallet', [MainController::class, 'wallet'])->name('wallet');
     Route::get('/projects', [ProjectController::class, 'list'])->name('project.list');
@@ -73,7 +78,6 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::get('purchase/website/list', [PurchaseWebController::class, 'puchaseWebList'])->name('purchase.webList');
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
-    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update/name/phone/country', [MainController::class, 'updateNamePhoneCountry'])->name('addNamecountry');
     Route::get('/add/bill-detail', [MainController::class, 'billDetail'])->name('bill.detail');
     Route::post('/add/credit', [AddCreditController::class, 'creditStore'])->name('credit.store');
@@ -83,15 +87,19 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
 
     Route::post('favourite/web/add', [MainController::class, 'addFavouriteWeb'])->name('add.favourite');
     Route::get('favourite/websites', [MainController::class, 'favouriteWeb'])->name('favourireWeb');
+    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    Route::post('/update-email/request', [ResetEmailController::class, 'updateEmailRequest'])->name('update.email.request');
+    Route::post('/verify-email-otp', [ResetEmailController::class, 'verify_email_otp'])->name('verify.email.otp');
+    Route::get('/reset-email-address', [ResetEmailController::class, 'reset_email_address'])->name('reset.email.address');
 
 });
 // admin Routes🌟
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
-    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    // Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
-    Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
+    // Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::get('/users/list', [AdminController::class, 'user_list'])->name('user.list');
     Route::get('/users/detail/{encodedId}', [AdminController::class, 'user_detail'])->name('user.detail');
     Route::delete('/user-delete/{id}', [AdminController::class, 'user_delete'])->name('user.delete');
@@ -102,6 +110,12 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('/website/rejected', [AdminController::class, 'website_rejected'])->name('website.rejected');
 
     Route::post('/website/status', [AdminController::class, 'change_status'])->name('website.status');
+    Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
+    Route::post('/update-email/request', [ResetEmailController::class, 'updateEmailRequest'])->name('update.email.request');
+    Route::post('/verify-email-otp', [ResetEmailController::class, 'verify_email_otp'])->name('verify.email.otp');
+    Route::get('/reset-email-address', [ResetEmailController::class, 'reset_email_address'])->name('reset.email.address');
+
+
 });
 
 

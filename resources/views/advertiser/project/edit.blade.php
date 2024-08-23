@@ -77,7 +77,7 @@ Edit
 
                     <li class="nav-item">
                         <p style="font-size:16px;" class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
-                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
+                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/profile/update-icon.svg') }}" alt="not-show">
                             Update project data
                         </p>
                     </li>
@@ -214,7 +214,7 @@ Edit
 
                     <li class="nav-item">
                         <p style="font-size:16px;"  class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
-                           <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
+                           <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/profile/update-icon.svg') }}" alt="not-show">
                             Update keywords
                         </p>
                     </li>
@@ -302,7 +302,7 @@ Edit
 
                     <li class="nav-item">
                         <p style="font-size:16px;"  class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
-                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
+                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/profile/update-icon.svg') }}" alt="not-show">
                             Update keywords
                         </p>
                     </li>
