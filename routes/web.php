@@ -15,10 +15,7 @@ use App\Http\Controllers\PurchaseWebController;
 Route::get('/', [MainController::class, 'index'])->name('home');
 
 Route::get('/home', [MainController::class, 'checkAccount'])->name('dashboard');
-
-
 Auth::routes();
-
 Route::middleware(['auth'])->as('user.')->prefix('user')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
@@ -37,8 +34,6 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::post('form/step2', [WebsiteController::class, 'postStep2'])->name('form.postStep2');
     Route::delete('website/delete/{id}', [WebsiteController::class, 'webDelete'])->name('websiteDelete');
     Route::post('/website/finish', [WebsiteController::class, 'storeAllStep'])->name('store.allSteps');
-
-
     Route::get('/sponsored', [MainController::class, 'sponsoredList'])->name('sponsored');
     Route::get('/contact-support', [MainController::class, 'ContactSupport'])->name('ContactSupport');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
@@ -51,7 +46,6 @@ Route::middleware(['auth', 'publishers'])->as('publishers.')->prefix('publishers
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
-
     Route::get('/KYC', [MainController::class, 'KYC'])->name('KYC');
 
 });
@@ -74,11 +68,9 @@ Route::middleware(['auth', 'advertiser'])->as('advertiser.')->prefix('advertiser
     Route::delete('/projects/delete/{id}', [ProjectController::class, 'projectDelete'])->name('project.delete');
     Route::get('/projects/detail/{encodedId}', [ProjectController::class, 'projectDetail'])->name('project.detail');
     Route::get('/projects/edit/{encodedId}', [ProjectController::class, 'projectEdit'])->name('project.edit');
-
     Route::get('/websites', [ProjectController::class, 'webList'])->name('webs.list');
     Route::post('/purchase/web', [PurchaseWebController::class, 'purchase_web'])->name('purchase.web');
     Route::get('purchase/website/list', [PurchaseWebController::class, 'puchaseWebList'])->name('purchase.webList');
-
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
@@ -98,7 +90,6 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('/home', [MainController::class, 'adminDashboard'])->name('dashboard');
     Route::get('/profile-setting', [MainController::class, 'ProfileSetting'])->name('ProfileSetting');
     Route::post('/update-profile', [MainController::class, 'updateProfile'])->name('update.profile');
-
     Route::post('/update-password', [MainController::class, 'updatePassword'])->name('update.password');
     Route::post('/update-email', [MainController::class, 'updateEmail'])->name('update.email');
     Route::get('/users/list', [AdminController::class, 'user_list'])->name('user.list');

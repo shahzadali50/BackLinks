@@ -58,7 +58,7 @@ Users
                 <div class="col-5">
                     <label> Filter by user role</label>
                     <br>
-                    <select name="role" class="js-example-basic-single links_admitted" onchange="submitForm()">
+                    <select name="role" class="js-example-basic-single links_admitted form-control" onchange="submitForm()">
                         <option value="" disabled selected>Select an option</option>
                         <option value="publisher">Publisher
                         </option>

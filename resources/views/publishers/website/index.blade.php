@@ -58,7 +58,7 @@ Website
                     <div class="mb-3">
                         <label for="Select_Country">Search by Country
                         </label>
-                        <select name="audience" class="selectTwo" onchange="submitForm()">
+                        <select name="audience" class="select2 form-control" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('countries.countries') as $country)
                             <option value="{{ $country }}" {{ old('audience') == $country ? 'selected' : '' }}>
@@ -74,7 +74,7 @@ Website
                     <div class="mb-3">
                         <label for="Select_Country">Search by categories
                         </label>
-                        <select name="categories" class="selectTwo" onchange="submitForm()">
+                        <select name="categories" class="select2 form-control" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('categories.categories') as $category)
                             <option value="{{ $category['label'] }}">
@@ -89,7 +89,7 @@ Website
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label> Search by type of links admitted <span class="text-danger">*</span></label>
-                        <select name="link_type" class="selectTwo" id="links_admitted" onchange="submitForm()">
+                        <select name="link_type" class="select2 form-control" id="links_admitted" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             <option value="Follow">Follow
                             </option>
@@ -106,7 +106,7 @@ Website
                         <div>
                             <label for="Website_Language"> Search by Language <span class="text-danger">*</span></label>
                         </div>
-                        <select required class="selectTwo" name="language" id="Website_Language"
+                        <select required class="select2 form-control" name="language" id="Website_Language"
                             onchange="submitForm()">
                             <option value="" disabled selected>Select a Language</option>
                             <option value="catalan">Catalán</option>
@@ -147,7 +147,7 @@ Website
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label>Search by Sponsorship notification </label>
-                        <select name="sponsorship" class="selectTwo" onchange="submitForm()">
+                        <select name="sponsorship" class="select2 form-control" onchange="submitForm()">
                             <option value="">Select an options</option>
 
                             <option value="Always">Always
@@ -330,7 +330,7 @@ Website
         document.getElementById('filerWebForm').submit();
     }
     $(document).ready(function() {
-        $('.selectTwo').select2();
+        $('.select2').select2();
     });
 </script>
 <script>

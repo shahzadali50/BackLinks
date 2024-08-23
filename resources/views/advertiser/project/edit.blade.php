@@ -70,328 +70,318 @@ Edit
 
     </div>
     {{-- Project Data🌟 --}}
-    <div class="col-12 mb-2">
-        <div class="card">
-            <div class="card-body">
+    <div class="col-12">
+        <div class="card mt-xxl-n5">
+            <div class="card-header">
+                <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
 
-                <ul class="nav nav-pills nav-justified mb-3" role="tablist">
-                    <li class="nav-item waves-effect waves-light">
-
-                        <a class="nav-link active" data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
+                    <li class="nav-item">
+                        <p style="font-size:16px;" class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
+                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
                             Update project data
-                        </a>
+                        </p>
                     </li>
 
-
                 </ul>
-                <!-- Tab panes -->
-                <div class="tab-content text-muted">
-                    <div class="tab-pane active" id="pill-justified-home-1" role="tabpanel">
-                        <div class="col-12">
-                            <div>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
 
-                                <div class="card-body">
-
-                                    <form action="{{ route('advertiser.update.step1', $project->id) }}" method="POST">
-                                        @csrf
-                                        <div class="row">
-                                            <!-- Project Name -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="project_name" class="form-label">Project name <span class="text-danger">*</span></label>
-                                                <input required  name="name" type="text" class="form-control" id="project_name" placeholder="Enter Project name" value="{{ old('project_name', $project->name) }}">
-                                                @error('project_name')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Project URL -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="project_url" class="form-label">URL of website <span class="text-danger">*</span></label>
-                                                <input required  value="{{ old('url', $project->url) }}" name="url" type="url" class="form-control" id="project_url" placeholder="Enter URL of website">
-                                                @error('url')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Project Categories -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="Project_categories">Project categories <span class="text-danger">*</span></label>
-                                                <br>
-                                                <select required  class="js-example-basic-multiple" name="categories[]" multiple="multiple" id="Project_categories">
-                                                    @foreach (config('categories.categories') as $category)
-                                                    <option value="{{ $category['label'] }}" {{ in_array($category['label'], old('categories', json_decode($project->categories, true) ?? [])) ? 'selected' : '' }}>
-                                                        {{ $category['label'] }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('categories')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Project Languages -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="Project_Language">Language(s) of your project <span class="text-danger">*</span></label>
-                                                <br>
-                                                <select required  class="js-example-basic-multiple" name="language[]" multiple="multiple" id="Project_Language">
-                                                    <option value="" disabled>Select one or more options</option>
-                                                    @foreach(['catalan', 'english', 'esukera', 'french', 'gallego', 'german', 'italiano', 'portuguese', 'spanish'] as $language)
-                                                    <option value="{{ $language }}" {{ in_array($language, old('language', json_decode($project->languages, true) ?? [])) ? 'selected' : '' }}>
-                                                        {{ ucfirst($language) }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('language')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Project Countries -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="Project_Country">Country or countries of your project <span class="text-danger">*</span></label>
-                                                <br>
-                                                <select required  class="js-example-basic-multiple" name="countries[]" multiple="multiple" id="Project_Country">
-                                                    @foreach(config('countries.countries') as $country)
-                                                    <option value="{{ $country }}" {{ in_array($country, old('countries', json_decode($project->countries, true) ?? [])) ? 'selected' : '' }}>
-                                                        {{ $country }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('countries')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Project Objectives -->
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="Project_Objectives">Objectives of your project <span class="text-danger">*</span></label>
-                                                <br>
-                                                <select required  class="js-example-basic-multiple" name="objectives[]" multiple="multiple" id="Project_Objectives">
-                                                    <option value="" disabled>Select one or more options</option>
-                                                    @foreach(['Increase SEO traffic', 'Selling more', 'Improve reputation', 'Branding'] as $objective)
-                                                    <option value="{{ $objective }}" {{ in_array($objective, old('objectives', json_decode($project->objectives, true) ?? [])) ? 'selected' : '' }}>
-                                                        {{ $objective }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('objectives')
-                                                <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                    <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Submit Button -->
-                                            <div class="col-12 mt-4">
-                                                <button type="submit" class="btn btn-dark ms-3">Update</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
+                    <!--end tab-pane-->
+                    <div class="tab-pane active" id="changePassword" role="tabpanel">
+                        <form action="{{ route('advertiser.update.step1', $project->id) }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <!-- Project Name -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="project_name" class="form-label">Project name <span class="text-danger">*</span></label>
+                                    <input required  name="name" type="text" class="form-control" id="project_name" placeholder="Enter Project name" value="{{ old('project_name', $project->name) }}">
+                                    @error('project_name')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
                                 </div>
 
+                                <!-- Project URL -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="project_url" class="form-label">URL of website <span class="text-danger">*</span></label>
+                                    <input required  value="{{ old('url', $project->url) }}" name="url" type="url" class="form-control" id="project_url" placeholder="Enter URL of website">
+                                    @error('url')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
 
+                                <!-- Project Categories -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="Project_categories">Project categories <span class="text-danger">*</span></label>
+                                    <br>
+                                    <select required  class="js-example-basic-multiple form-control" name="categories[]" multiple="multiple" id="Project_categories">
+                                        @foreach (config('categories.categories') as $category)
+                                        <option value="{{ $category['label'] }}" {{ in_array($category['label'], old('categories', json_decode($project->categories, true) ?? [])) ? 'selected' : '' }}>
+                                            {{ $category['label'] }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('categories')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
 
+                                <!-- Project Languages -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="Project_Language">Language(s) of your project <span class="text-danger">*</span></label>
+                                    <br>
+                                    <select required  class="js-example-basic-multiple form-control" name="language[]" multiple="multiple" id="Project_Language">
+                                        <option value="" disabled>Select one or more options</option>
+                                        @foreach(['catalan', 'english', 'esukera', 'french', 'gallego', 'german', 'italiano', 'portuguese', 'spanish'] as $language)
+                                        <option value="{{ $language }}" {{ in_array($language, old('language', json_decode($project->languages, true) ?? [])) ? 'selected' : '' }}>
+                                            {{ ucfirst($language) }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('language')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Project Countries -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="Project_Country">Country or countries of your project <span class="text-danger">*</span></label>
+                                    <br>
+                                    <select required  class="js-example-basic-multiple form-control" name="countries[]" multiple="multiple" id="Project_Country">
+                                        @foreach(config('countries.countries') as $country)
+                                        <option value="{{ $country }}" {{ in_array($country, old('countries', json_decode($project->countries, true) ?? [])) ? 'selected' : '' }}>
+                                            {{ $country }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('countries')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Project Objectives -->
+                                <div class="col-sm-6 mb-3">
+                                    <label for="Project_Objectives">Objectives of your project <span class="text-danger">*</span></label>
+                                    <br>
+                                    <select required  class="js-example-basic-multiple form-control" name="objectives[]" multiple="multiple" id="Project_Objectives">
+                                        <option value="" disabled>Select one or more options</option>
+                                        @foreach(['Increase SEO traffic', 'Selling more', 'Improve reputation', 'Branding'] as $objective)
+                                        <option value="{{ $objective }}" {{ in_array($objective, old('objectives', json_decode($project->objectives, true) ?? [])) ? 'selected' : '' }}>
+                                            {{ $objective }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('objectives')
+                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-dark ms-3">Update</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
+
+
 
                     </div>
+
                 </div>
-            </div><!-- end card-body -->
-        </div><!-- end card -->
+            </div>
+        </div>
     </div>
+
 
     {{-- Competitors 🌟 --}}
-    <div class="col-12 mb-3">
-        <div class="card">
-            <div class="card-body">
+    <div class="col-12">
+        <div class="card mt-xxl-n5">
+            <div class="card-header">
+                <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
 
-                <ul class="nav nav-pills nav-justified mb-3" role="tablist">
-
-                    <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#add-competitors" role="tab"
-                            aria-disabled="true">
-                            Update competitors
-                        </a>
+                    <li class="nav-item">
+                        <p style="font-size:16px;"  class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
+                           <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
+                            Update keywords
+                        </p>
                     </li>
 
-
                 </ul>
-                <!-- Tab panes -->
-                <div class="tab-content text-muted">
-                    <div class="tab-pane active" id="add-competitors" role="tabpanel">
-                        <div class="col-12">
-                            <div>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
 
-                                <div class="card-body">
-                                    <form action="{{ route('advertiser.update.step2', $project->id) }}" method="POST">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for=""><span class="text-dark" style="font-weight: 700">Competitors</span> You can add up to 3 different competitors <span class="text-danger">*</span></label>
-                                            </div>
+                    <!--end tab-pane-->
+                    <div class="tab-pane active" id="changePassword" role="tabpanel">
 
-                                            <div class="col-md-4 mb-md-0 mb-3">
-                                                <input
-                                                    required
-                                                    value="{{ old('competitor1', $competitors['competitor1'] ?? '') }}"
-                                                    name="competitor1"
-                                                    type="url"
-                                                    class="form-control"
-                                                    placeholder="https://www.competitor1.com"
-                                                >
-                                                @error('competitor1')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-4 mb-md-0 mb-3">
-                                                <input
-                                                    required
-                                                    value="{{ old('competitor2', $competitors['competitor2'] ?? '') }}"
-                                                    name="competitor2"
-                                                    type="url"
-                                                    class="form-control"
-                                                    placeholder="https://www.competitor2.com"
-                                                >
-                                                @error('competitor2')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-4 mb-md-0 mb-3">
-                                                <input
-                                                    required
-                                                    value="{{ old('competitor3', $competitors['competitor3'] ?? '') }}"
-                                                    name="competitor3"
-                                                    type="url"
-                                                    class="form-control"
-                                                    placeholder="https://www.competitor3.com"
-                                                >
-                                                @error('competitor3')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-12 mt-4">
-                                                <button type="submit" class="btn btn-dark ms-3">Update</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
+                        <form action="{{ route('advertiser.update.step2', $project->id) }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for=""><span class="text-dark" style="font-weight: 700">Competitors</span> You can add up to 3 different competitors <span class="text-danger">*</span></label>
                                 </div>
 
+                                <div class="col-md-4 mb-md-0 mb-3">
+                                    <input
+                                        required
+                                        value="{{ old('competitor1', $competitors['competitor1'] ?? '') }}"
+                                        name="competitor1"
+                                        type="url"
+                                        class="form-control"
+                                        placeholder="https://www.competitor1.com"
+                                    >
+                                    @error('competitor1')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-md-0 mb-3">
+                                    <input
+                                        required
+                                        value="{{ old('competitor2', $competitors['competitor2'] ?? '') }}"
+                                        name="competitor2"
+                                        type="url"
+                                        class="form-control"
+                                        placeholder="https://www.competitor2.com"
+                                    >
+                                    @error('competitor2')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-md-0 mb-3">
+                                    <input
+                                        required
+                                        value="{{ old('competitor3', $competitors['competitor3'] ?? '') }}"
+                                        name="competitor3"
+                                        type="url"
+                                        class="form-control"
+                                        placeholder="https://www.competitor3.com"
+                                    >
+                                    @error('competitor3')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-dark ms-3">Update</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
 
                     </div>
+
                 </div>
-            </div><!-- end card-body -->
-        </div><!-- end card -->
+            </div>
+        </div>
     </div>
+
     {{-- Keywords🌟 --}}
     <div class="col-12">
+        <div class="card mt-xxl-n5">
+            <div class="card-header">
+                <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
 
-        <div class="card">
-            <div class="card-body">
-                <ul class="nav nav-pills nav-justified mb-3" role="tablist">
-
-
-                    <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#pill-justified-messages-1" role="tab"
-                            aria-disabled="true">
+                    <li class="nav-item">
+                        <p style="font-size:16px;"  class="nav-link active mb-0" data-bs-toggle="tab" href="#changePassword" role="tab">
+                            <img style="width: 30px;" class="img-fluid" src="{{ url('build/images/update-icons/update-icon.svg') }}" alt="not-show">
                             Update keywords
-                        </a>
+                        </p>
                     </li>
+
                 </ul>
-                <div class="tab-content text-muted">
-                    <div class="tab-pane active" id="pill-justified-home-1" role="tabpanel">
-                        <div class="col-12">
-                            <div>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
 
-                                <div class="card-body">
-                                    <form action="{{ route('advertiser.update.step3', $project->id) }}" method="POST">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="keywords" class="form-label">Introduce the keywords (separated by comma) <span class="text-danger" style="font-size: 16px">*</span></label>
-                                                    <input name="keywords" class="form-control" type="text" id="keywords"
-                                                    value="{{ old('keywords', $project->keywords) }}">
-                                                    @error('keywords')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="trackkeywords">Where do you want to track your keywords?<span class="text-danger" style="font-size: 16px">*</span></label>
-                                                    <select class="js-example-basic-multiple" name="trackkeywords[]" multiple="multiple" id="trackkeywords">
-                                                        @foreach (config('countries.countries') as $country)
-                                                            <option value="{{ $country }}" {{ collect(old('trackkeywords', json_decode($project->trackkeywords, true)))->contains($country) ? 'selected' : '' }}>
-                                                                {{ $country }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('trackkeywords')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="Project_Objectives">In what type of device do you want to keep track of the results?<span class="text-danger" style="font-size: 16px;"> *</span></label>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="mb-3">
-                                                    <input name="track_device" type="radio" class="btn-check" id="desktop" value="desktop" {{ old('track_device', $project->track_device) == 'desktop' ? 'checked' : '' }}>
-                                                    <label class="btn btn-outline-danger" for="desktop"><i class="fa fa-desktop me-1" aria-hidden="true"></i>Computer</label>
+                    <!--end tab-pane-->
+                    <div class="tab-pane active" id="changePassword" role="tabpanel">
 
-                                                    <input name="track_device" type="radio" class="btn-check" id="smartphone" value="smartphone" {{ old('track_device', $project->track_device) == 'smartphone' ? 'checked' : '' }}>
-                                                    <label class="btn btn-outline-danger" for="smartphone"><i class='bx bx-mobile me-1'></i>Smart Phone</label>
-
-                                                    <input name="track_device" type="radio" class="btn-check" id="both" value="desktop smart_phone" {{ old('track_device', $project->track_device) == 'desktop smart_phone' ? 'checked' : '' }}>
-                                                    <label class="btn btn-outline-info" for="both"><i class='bx bxs-objects-horizontal-center me-1'></i>Both</label>
-
-                                                    @error('track_device')
-                                                    <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
-                                                        <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
-                                                    </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-dark ms-3">Update</button>
-                                            </div>
+                        <form action="{{ route('advertiser.update.step3', $project->id) }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="keywords" class="form-label">Introduce the keywords (separated by comma) <span class="text-danger" style="font-size: 16px">*</span></label>
+                                        <input name="keywords" class="form-control" type="text" id="keywords"
+                                        value="{{ old('keywords', $project->keywords) }}">
+                                        @error('keywords')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
                                         </div>
-                                    </form>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="trackkeywords">Where do you want to track your keywords?<span class="text-danger" style="font-size: 16px">*</span></label>
+                                        <select class="js-example-basic-multiple form-control" name="trackkeywords[]" multiple="multiple" id="trackkeywords">
+                                            @foreach (config('countries.countries') as $country)
+                                                <option value="{{ $country }}" {{ collect(old('trackkeywords', json_decode($project->trackkeywords, true)))->contains($country) ? 'selected' : '' }}>
+                                                    {{ $country }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('trackkeywords')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="Project_Objectives">In what type of device do you want to keep track of the results?<span class="text-danger" style="font-size: 16px;"> *</span></label>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input name="track_device" type="radio" class="btn-check" id="desktop" value="desktop" {{ old('track_device', $project->track_device) == 'desktop' ? 'checked' : '' }}>
+                                        <label class="btn btn-outline-danger" for="desktop"><i class="fa fa-desktop me-1" aria-hidden="true"></i>Computer</label>
 
+                                        <input name="track_device" type="radio" class="btn-check" id="smartphone" value="smartphone" {{ old('track_device', $project->track_device) == 'smartphone' ? 'checked' : '' }}>
+                                        <label class="btn btn-outline-danger" for="smartphone"><i class='bx bx-mobile me-1'></i>Smart Phone</label>
+
+                                        <input name="track_device" type="radio" class="btn-check" id="both" value="desktop smart_phone" {{ old('track_device', $project->track_device) == 'desktop smart_phone' ? 'checked' : '' }}>
+                                        <label class="btn btn-outline-info" for="both"><i class='bx bxs-objects-horizontal-center me-1'></i>Both</label>
+
+                                        @error('track_device')
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>{{ $message }}</strong>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-dark ms-3">Update</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
+
                     </div>
+
                 </div>
-            </div><!-- end card-body -->
-        </div><!-- end card -->
+            </div>
+        </div>
     </div>
+
     @endsection
     @section('script')
     <script>

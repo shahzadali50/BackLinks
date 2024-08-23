@@ -52,9 +52,9 @@ Website List
                 {{-- Search by Country --}}
                 <div class="col-sm-4">
                     <div class="mb-3">
-                        <label for="Select_Country">Search by Country
+                        <label >Search by Country
                         </label>
-                        <select name="audience" class="Select_Country" onchange="submitForm()">
+                        <select name="audience" class="select2 form-control" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('countries.countries') as $country)
                             <option value="{{ $country }}" {{ old('audience')==$country ? 'selected' : '' }}>
@@ -68,9 +68,9 @@ Website List
                 {{-- Search by categories --}}
                 <div class="col-sm-4">
                     <div class="mb-3">
-                        <label for="Select_Country">Search by categories
+                        <label>Search by categories
                         </label>
-                        <select name="categories" class="Select_Country" onchange="submitForm()">
+                        <select name="categories" class="select2 form-control" onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             @foreach (config('categories.categories') as $category)
                             <option value="{{ $category['label'] }}">
@@ -85,7 +85,7 @@ Website List
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label> Search by type of links admitted <span class="text-danger">*</span></label>
-                        <select name="link_type" class="js-example-basic-single links_admitted" id="links_admitted"
+                        <select name="link_type" class="select2 form-control" id="links_admitted"
                             onchange="submitForm()">
                             <option value="" disabled selected>Select an option</option>
                             <option value="Follow">Follow
@@ -103,7 +103,7 @@ Website List
                         <div>
                             <label for="Website_Language"> Search by Language <span class="text-danger">*</span></label>
                         </div>
-                        <select required class="js-example-basic-multiple" name="language" id="Website_Language"
+                        <select required class="select2 form-control" name="language" id="Website_Language"
                             onchange="submitForm()">
                             <option value="" disabled selected>Select a Language</option>
                             <option value="catalan">Catalán</option>
@@ -144,7 +144,7 @@ Website List
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label>Search by Sponsorship notification </label>
-                        <select name="sponsorship" class="delicated_topics" onchange="submitForm()">
+                        <select name="sponsorship" class="select2 form-control" onchange="submitForm()">
                             <option value="">Select an options</option>
 
                             <option value="Always">Always
@@ -337,12 +337,8 @@ Website List
 
 <script>
     $(document).ready(function() {
-                $('.Project_Language').select2();
-                $('.Select_Country').select2();
-                $('.links_per_post').select2();
-                $('.links_admitted').select2();
-                $('.delicated_topics').select2();
-                $('.js-example-basic-multiple').select2();
+
+                $('.select2').select2();
             });
 
             function submitForm() {

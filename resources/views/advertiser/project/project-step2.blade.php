@@ -23,13 +23,13 @@
             @endif
         </div> --}}
         <div class="col-12">
-            <div class="card">
+            <div class="card tabs-card">
                 <div class="card-body">
 
                     <ul class="nav nav-pills nav-justified mb-3" role="tablist">
                         <li class="nav-item waves-effect waves-light">
 
-                            <a class="nav-link disabled" data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
                                 Fill in your project data
                             </a>
                         </li>

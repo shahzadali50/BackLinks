@@ -66,9 +66,9 @@ class ProjectController extends Controller
     public function storeStep2(Request $request)
     {
         $request->validate([
-            'competitor1' => 'nullable|url|different:competitor2|different:competitor3',
-            'competitor2' => 'nullable|url|different:competitor1|different:competitor3',
-            'competitor3' => 'nullable|url|different:competitor1|different:competitor2',
+            'competitor1' => 'url|different:competitor2|different:competitor3',
+            'competitor2' => 'url|different:competitor1|different:competitor3',
+            'competitor3' => 'url|different:competitor1|different:competitor2',
         ]);
 
         Session::put('project_step2', $request->only(['competitor1', 'competitor2', 'competitor3']));

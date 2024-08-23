@@ -1,4 +1,4 @@
-@stack('css')
+
 <!-- Layout config Js -->
 <script src="{{ URL::asset('build/js/layout.js') }}"></script>
 <!-- Bootstrap Css -->
@@ -78,5 +78,6 @@
    }
 
 </style>
+@stack('css')
 
 @yield('css')

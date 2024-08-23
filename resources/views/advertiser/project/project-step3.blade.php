@@ -65,16 +65,16 @@ Add Project
     </div>
     <div class="col-12">
 
-        <div class="card">
+        <div class="card tabs-card">
             <div class="card-body">
                 <ul class="nav nav-pills nav-justified mb-3" role="tablist">
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link disabled" data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#pill-justified-home-1" role="tab">
                             Fill in your project data
                         </a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link disabled" data-bs-toggle="tab" href="#pill-justified-profile-1" role="tab"
+                        <a class="nav-link active" data-bs-toggle="tab" href="#pill-justified-profile-1" role="tab"
                             aria-disabled="true">
                             Add competitors
                         </a>
@@ -124,8 +124,9 @@ Add Project
                                                     <label for="trackkeywords">Where do you want to track your
                                                         keywords?<span class="text-danger"
                                                             style="font-size: 16px">*</span></label>
-                                                    <select class="js-example-basic-multiple" name="trackkeywords[]"
+                                                    <select class="select2 form-control" name="trackkeywords[]"
                                                         multiple="multiple" id="trackkeywords">
+                                                        <option value="" disabled>Select one or more options</option>
                                                         @foreach (config('countries.countries') as $country)
                                                         <option value="{{ $country }}" {{ collect(old('trackkeywords'))->contains($country) ? 'selected' : '' }}>
                                                             {{ $country }}</option>
@@ -147,7 +148,7 @@ Add Project
                                             <div class="col-12">
                                                 <div class="mb-3">
 
-                                                    <input name="track_device" type="radio" class="btn-check"
+                                                    <input name="track_device" type="radio" class="btn-check "
                                                         id="desktop" value="desktop" {{ old('track_device') == 'desktop' ? 'checked' : '' }}>
                                                     <label class="btn btn-outline-danger" for="desktop"><i
                                                             class="fa fa-desktop me-1" aria-hidden="true"></i>Computer
@@ -193,7 +194,7 @@ Add Project
 @section('script')
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
+        $('.select2').select2();
     });
 
     (function() {
